@@ -26,7 +26,7 @@ public class Algoritmos
         return mapa;
     }
 
-    #region algoritmos
+    #region algoritmos_simples
 
     public static int[,] PerlinNoise(int[,] _mapa, float _semilla)
     {
