@@ -5,7 +5,15 @@ using UnityEngine;
 /// Modelo
 /// </summary>
 public class Algoritmos
-{
+{    
+	//------------------------------------------------------------------------------
+    /// <summary>
+    /// Genera un array bidimensional
+    /// </summary>
+    /// <param name="_ancho"> ancho del mapa  2D</param>
+    /// <param name="_alto"> al to del mapa 2D</param>
+    /// <param name="_vacio"> Verdadero si queremos iniciarlizarlo a cero. Si no a uno.</param>
+    /// <returns> El mapa 2D generado</returns>
     public static int[,] GenerarArray(int _ancho, int _alto, bool _vacio)
     {
         int[,] mapa = new int[_ancho, _alto];
