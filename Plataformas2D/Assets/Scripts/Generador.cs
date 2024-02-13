@@ -12,17 +12,22 @@ using UnityEditor;
 /// </summary>
 public class Generador : MonoBehaviour
 {
-    [Header("Caracteristicas del mapa")]
-    [SerializeField] private Tilemap mapaDeLosetas;
-    [SerializeField] private TileBase loseta;
-
-    [Header("Dimensiones del mapa")]
-    [SerializeField] private int ancho = 60;
-    [SerializeField] private int alto = 30;
+	[Header("Referencias")]
+	[Tooltip("El Tilemap para dibujar el mapa")]
+	[SerializeField] private Tilemap mapaDeLosetas;
+	[Tooltip("El mosaico para dibujar(usa un Rule Tile para obtener mejores resultados)")]
+	[SerializeField] private TileBase loseta;
+	
+	[Header("Dimensiones mapa")]
+	[Tooltip("Ancho del mapa")]
+	[SerializeField] private int ancho = 60;
+	[Tooltip("Alto del mapa")]
+	[SerializeField] private int alto = 34;
 
 	[Tooltip("La configuracion del mapa")]
 	public ConfigurarMapa configurarMapa;
 
+    int[,] mapa;
 /*
     [Header("Semilla")]
     [SerializeField] private bool semillaAleatoria = true;
@@ -90,14 +95,15 @@ public class Generador : MonoBehaviour
         }
     }
 
+	[ExecuteInEditMode]
     public void GenerarMapa()
     {
         Debug.Log("Estoy en generar mapa");
 		float semilla = 0f;
 
-        int[,] mapa = null;
+        mapa = new int[ancho, alto];
 
-        mapaDeLosetas.ClearAllTiles();
+        LimpiarMapa();
 
 		// Generar semilla nueva de forma aleatoria
 		if (configurarMapa.semillaAleatoria == true)
@@ -105,7 +111,9 @@ public class Generador : MonoBehaviour
 			semilla = Random.Range(0f, 1000f);
 		}
 		else
+		{
 			semilla = configurarMapa.semilla;
+		}
 
         //mapa = Algoritmos.GenerarArray(ancho, alto, false);
 
@@ -134,13 +142,12 @@ public class Generador : MonoBehaviour
 		case Algoritmo.PERLINNOISE_CUEVA:
 				mapa = Algoritmos.GenerarArray(ancho, alto, false);
 				mapa = Algoritmos.PerlinNoise_Cueva(mapa, configurarMapa.modificador, configurarMapa.conBordes);
-					break;
+				break;
+					
 		case Algoritmo.PERLINNOISE_CUEVA_MODIFICADO:
 				mapa = Algoritmos.GenerarArray(ancho, alto, false);
 				mapa = Algoritmos.PerlinNoise_Cueva(mapa, configurarMapa.modificador, configurarMapa.conBordes, configurarMapa.desplazamientoX, configurarMapa.desplazamientoY, semilla);
 				break;
-
-  	
 
 		case Algoritmo.RANDOMWALK_CUEVA:
 				mapa = Algoritmos.GenerarArray(ancho, alto, false);
@@ -152,7 +159,6 @@ public class Generador : MonoBehaviour
 				mapa = Algoritmos.TunelDireccional(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza, configurarMapa.desplazamientoMax, configurarMapa.desplazamiento);
 				break;
 
-		
 		case Algoritmo.TUNEL_HORIZONTAL:
 				mapa = Algoritmos.GenerarArray(ancho, alto, false);
 				mapa = Algoritmos.TunelHorizontal(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza, configurarMapa.desplazamientoMax, configurarMapa.desplazamiento);
@@ -172,7 +178,6 @@ public class Generador : MonoBehaviour
 				mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, configurarMapa.porcentajeRellenoFloat, configurarMapa.conBordes);
 				mapa = Algoritmos.AutomataCelularVonNeuman(mapa, configurarMapa.numeroPasadas, configurarMapa.conBordes);
 				break;
-
         }
 
         // dibujar el mapa

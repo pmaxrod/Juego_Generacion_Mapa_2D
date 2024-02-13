@@ -105,14 +105,12 @@ public class ConfigurarMapaEditor : Editor
                 capaMapa.modificador = EditorGUILayout.Slider("Modificador", capaMapa.modificador, 0.0001f, 1.0f);
                 break;
 
-
             case Algoritmo.PERLINNOISE_CUEVA_MODIFICADO:
                 capaMapa.conBordes = EditorGUILayout.Toggle("Bordes con muros", capaMapa.conBordes);
                 capaMapa.modificador = EditorGUILayout.Slider("Modificador", capaMapa.modificador, 0.0001f, 1.0f);
                 capaMapa.desplazamientoX = EditorGUILayout.Slider("Desplazamiento X", capaMapa.desplazamientoX, 0f, 10f);
                 capaMapa.desplazamientoY = EditorGUILayout.Slider("Desplazamiento Y", capaMapa.desplazamientoY, 0f, 10f);
                 break;
-
 
             case Algoritmo.RANDOMWALK:
                 //No additional Variables
@@ -132,8 +130,6 @@ public class ConfigurarMapaEditor : Editor
                 capaMapa.diagonal = EditorGUILayout.Toggle("Diagonal", capaMapa.diagonal);
                 break;
 
-           
-
             case Algoritmo.TUNEL_VERTICAL:
                 capaMapa.minAncho = EditorGUILayout.IntField("Ancho minimo", capaMapa.minAncho);
                 capaMapa.maxAncho = EditorGUILayout.IntField("Ancho maximo", capaMapa.maxAncho);
@@ -147,7 +143,7 @@ public class ConfigurarMapaEditor : Editor
                 capaMapa.maxAncho = EditorGUILayout.IntField("Ancho maximo", capaMapa.maxAncho);
                 capaMapa.maxCambio = EditorGUILayout.IntField("Maximo cambio", capaMapa.maxCambio);
                 capaMapa.aspereza = EditorGUILayout.IntSlider(new GUIContent("Aspereza", "Esto se compara con un numero aleatorio para determinar si podemos cambiar la posicion x actual de la ruta."), capaMapa.aspereza, 0, 100);
-                capaMapa.desplazamientoMax = EditorGUILayout.IntField(new GUIContent("Desplazamiento m�ximo", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del t�nel."), capaMapa.desplazamientoMax);
+                capaMapa.desplazamientoMax = EditorGUILayout.IntField(new GUIContent("Desplazamiento maximo", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.desplazamientoMax);
                 capaMapa.desplazamiento = EditorGUILayout.Slider(new GUIContent("Desplazamiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del t�nel."), capaMapa.desplazamiento, 0f, 1f);
                 break;
 
@@ -171,15 +167,12 @@ public class ConfigurarMapaEditor : Editor
             case Algoritmo.MAPA_ALEATORIO:
                 capaMapa.conBordes = EditorGUILayout.Toggle("Bordes con muros", capaMapa.conBordes);
                 capaMapa.porcentajeRellenoFloat = EditorGUILayout.Slider("Porcentaje de relleno", capaMapa.porcentajeRellenoFloat, 0.0001f, 1.0f);
-                
-
                 break;
 
             case Algoritmo.AUTOMATA_CELULAR_MOORE:
                 capaMapa.conBordes = EditorGUILayout.Toggle("Bordes con muros", capaMapa.conBordes);
                 capaMapa.porcentajeRellenoFloat = EditorGUILayout.Slider("Porcentaje de relleno", capaMapa.porcentajeRellenoFloat, 0.0001f, 1.0f);
                 capaMapa.numeroPasadas = EditorGUILayout.IntField("Numero de pasadas", capaMapa.numeroPasadas);
-                
                 break;
 
             case Algoritmo.AUTOMATA_CELULAR_VONNEUMAN:
@@ -192,7 +185,8 @@ public class ConfigurarMapaEditor : Editor
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         AssetDatabase.SaveAssets();
 
-        if (GUI.changed)
-            EditorUtility.SetDirty(capaMapa);
+        if (GUI.changed){
+            EditorUtility.SetDirty(capaMapa);			
+		}
     }
 }
