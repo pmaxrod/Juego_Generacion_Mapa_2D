@@ -63,7 +63,7 @@ public class ConfigurarMapa : ScriptableObject
 
 
     public float porcentajeRellenoFloat; // Para los algoritmos de aut�matas
-    public int numeroPasadas; // n�mero de pasadas para los automatas
+    public int numeroPasadas; // numero de pasadas para los automatas
 }
 
 
