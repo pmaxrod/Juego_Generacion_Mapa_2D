@@ -3,187 +3,197 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+//------------------------------------------------------------------------------------------
 
-public enum Algoritmo
-{
-    PERLIN_NOISE, PERLIN_NOISE_SUAVIZADO, RANDOMWALK,
-    RANDOMWALK_SUAVISADO,
-    PERLIN_NOISE_CUEVA,
-    PERLIN_NOISE_CUEVA_MODIFICADO,
-    RANDOMWALK_CUEVA,
-    TUNELVERTICAL,
-    TUNELHORIZONTAL,
-    MAPA_ALEATORIO,
-    AUTOMATA_CELULARMOORE,
-    AUTOMATA_CELULAR_VONNEUMAN
 
-}
-/// <summary>
-/// Controlador
-/// </summary>
+
 public class Generador : MonoBehaviour
 {
-    [Header("Caracteristicas del mapa")]
-    [SerializeField] private Tilemap mapaDeLosetas;
-    [SerializeField] private TileBase loseta;
+	
 
-    [Header("Dimensiones del mapa")]
-    [SerializeField] private int ancho = 60;
-    [SerializeField] private int alto = 30;
+	[Header("Referencias")]
+	[Tooltip("El Tilemap para dibujar el mapa")]
+	[SerializeField] private Tilemap mapaDeLosetas;
+	[Tooltip("El mosaico para dibujar(usa un Rule Tile para obtener mejores resultados)")]
+	[SerializeField] private TileBase loseta;
+	
 
-    [Header("Semilla")]
-    [SerializeField] private bool semillaAleatoria = true;
-    [SerializeField] private float semilla = 0f;
+	[Header("Dimensiones mapa")]
+	[Tooltip("Ancho del mapa")]
+	[SerializeField] private int ancho = 60;
+	[Tooltip("Alto del mapa")]
+	[SerializeField] private int alto = 34;
 
-    [Header("Perlin Noise suavizado")]
-    [SerializeField] private int intervalo = 1;
-
-    [Header("Algoritmo - RandomWalk suavizado")]
-    [SerializeField] private int minimoAnchoSeccion = 2;
-
-    [Header("Cuevas------------------------------")]
-    [SerializeField] private bool bordesSonMuros = true;
-
-    [Header("PerlinNoise Cuevas")]
-    [SerializeField] private float modificador = 0.1f;
-    [SerializeField] private float offSetX = 0f;
-    [SerializeField] private float offSetY = 0f;
+	[Tooltip("La configuración del mapa")]
+	public ConfigurarMapa configurarMapa;
 
 
-    [Header("RandomWalk Cueva")]
-    [Range(0, 1)] // para asegurarnos que esta entre 0 y 1
-    [SerializeField] private float porcentajeEliminar = 0.25f; //  25 %
-    [SerializeField] private bool movimientoDiagonal = false;
+	
 
-    [Header("Tunel Direccional")]
-    [SerializeField] private int anchoMaximo = 4;
-    [SerializeField] private int anchoMinimo = 1; // se quitarï¿½ 3 bloques
-
-    [Range(0, 1)] // para asegurarnos que esta entre 0 y 1
-    [SerializeField] private float aspereza = 0.75f;
-
-    [SerializeField] private int desplazamientoMaximo = 1;
-
-    [Range(0, 1)] // para asegurarnos que esta entre 0 y 1
-    [SerializeField] private float desplazamiento = 0.75f;
+	int[,] mapa;
 
 
-    [Header("Automata celular")]
-    [Range(0, 1)]
-    [SerializeField] private float porcentajeRelleno = 0.45f;
-    [SerializeField] private int totalPasadas = 1;
+	//------------------------------------------------------------------------------------------
+	private void Start()
+	{
+		//GenerarMapa() ;
 
-    [Header("Elegir Algoritmo")]
-    [SerializeField] private Algoritmo algoritmo = Algoritmo.PERLIN_NOISE;
+		
+	}
+
+	//------------------------------------------------------------------------------------------
+
+	private void Update()
+	{
+		if( Input.GetKeyDown( KeyCode.G) || Input.GetMouseButtonDown(0))
+		{
+			GenerarMapa() ;
+		}
+
+		if( Input.GetKeyDown( KeyCode.L) || Input.GetMouseButtonDown(1))
+		{
+			LimpiarMapa() ;
+		}
+	}
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	//------------------------------------------------------------------------------------------
+	/// <summary>
+	/// 
+	/// 
+	/// </summary>
+	/// <param name="_mapa"></param>
+	/// <param name="_mapaDeLosetas"></param>
+	/// <param name="_loseta"></param>
 
-    }
+	[ExecuteInEditMode]
+	public void GenerarMapa( )
+	{
+		Debug.Log("Generando mapa") ;
+		float semilla = 0f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G))
+		// crear el array bidimensional del mapa
+		mapa = new int[ ancho, alto];
+
+		// Limpiar mapa de rosetas
+		LimpiarMapa();
+
+
+		// Generar semilla nueva de forma aleatoria
+		if (configurarMapa.semillaAleatoria == true)
+		{
+			semilla = Random.Range(0f, 1000f);
+		}
+		else
+			semilla = configurarMapa.semilla;
+
+
+		switch (configurarMapa.algoritmo)
         {
-            GenerarMapa();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LimpiarMapa();
-        }
-    }
+		case Algoritmo.PERLINNOISE:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, true);
+				mapa = Algoritmos.PerlinNoise(mapa, semilla);
+				break;
 
-    public void GenerarMapa()
-    {
-        Debug.Log("Estoy en generar mapa");
+		case Algoritmo.PERLINNOISE_SUAVIZADO:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, true);
+				mapa = Algoritmos.PerlinNoise_Suavizado(mapa, semilla, configurarMapa.intervalo);
+				break;
 
-        int[,] mapa = null;
+    	case Algoritmo.RANDOMWALK:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, true);
+				mapa = Algoritmos.RandomWalk(mapa, semilla);
+				break;
 
-        mapaDeLosetas.ClearAllTiles();
+		case Algoritmo.RANDOMWALK_SUAVIZADO:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, true);
+				mapa = Algoritmos.RandomWalk_Suavizado(mapa, semilla, configurarMapa.intervalo);
+				break;
 
-        if (semillaAleatoria)
-        {
-            semilla = Random.Range(0f, 1000f);
-        }
 
-        //mapa = Algoritmos.GenerarArray(ancho, alto, false);
 
-        switch (algoritmo)
-        {
-            case Algoritmo.PERLIN_NOISE:
-                {
-                    mapa = Algoritmos.GenerarArray(ancho, alto, true);
-                    mapa = Algoritmos.PerlinNoise(mapa, semilla);
-                    break;
-                }
-            case Algoritmo.PERLIN_NOISE_SUAVIZADO:
-                {
-                    mapa = Algoritmos.GenerarArray(ancho, alto, true);
-                    mapa = Algoritmos.PerlinNoise(mapa, semilla, intervalo);
-                    break;
-                }
-            case Algoritmo.RANDOMWALK:
-                mapa = Algoritmos.GenerarArray(ancho, alto, true);
-                mapa = Algoritmos.RandomWalk(mapa, semilla);
-                break;
+		case Algoritmo.PERLINNOISE_CUEVA:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.PerlinNoise_Cueva(mapa, semilla, configurarMapa.modificador, configurarMapa.conBordes);
+					break;
+		case Algoritmo.PERLINNOISE_CUEVA_MODIFICADO:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.PerlinNoise_Cueva(mapa, configurarMapa.modificador, configurarMapa.conBordes, configurarMapa.desplazamientoX, configurarMapa.desplazamientoY, semilla);
+				break;
+	
 
-            case Algoritmo.RANDOMWALK_SUAVISADO:
-                mapa = Algoritmos.GenerarArray(ancho, alto, true);
-                mapa = Algoritmos.RandomWalk(mapa, semilla, minimoAnchoSeccion);
-                break;
+		case Algoritmo.RANDOMWALK_CUEVA:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.RandomWalk_Cueva(mapa, semilla, configurarMapa.porcentajeEliminar);
+				break;
 
-            case Algoritmo.PERLIN_NOISE_CUEVA:
-                mapa = Algoritmos.GenerarArray(ancho, alto, false);
-                mapa = Algoritmos.PerlinNoise_Cueva(mapa, modificador, bordesSonMuros);
-                break;
+				
+		case Algoritmo.RANDOMWALK_CUEVA_MODIFICADO:
 
-            case Algoritmo.PERLIN_NOISE_CUEVA_MODIFICADO:
-                mapa = Algoritmos.GenerarArray(ancho, alto, false);
-                mapa = Algoritmos.PerlinNoise_Cueva(mapa, modificador, bordesSonMuros, offSetX, offSetY, semilla);
-                break;
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.RandomWalk_Cueva(mapa, semilla, configurarMapa.porcentajeEliminar, configurarMapa.conBordes, configurarMapa.diagonal);
+				break;
+				
+		case Algoritmo.TUNEL_VERTICAL:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.TunelDireccional(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza);
+				break;
+				
+		case Algoritmo.TUNEL_VERTICAL_MODIFICADO:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.TunelDireccional(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza, configurarMapa.desplazamientoMax, configurarMapa.desplazamiento);
+				break;
+		
+		case Algoritmo.TUNEL_HORIZONTAL:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.TunelDireccional_Horizontal(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza);
+				break;		
+				
+		case Algoritmo.TUNEL_HORIZONTAL_MODIFICADO:
+				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
+				mapa = Algoritmos.TunelDireccional_Horizontal(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza, configurarMapa.desplazamientoMax, configurarMapa.desplazamiento);
+				break;
+				
+		case Algoritmo.MAPA_ALEATORIO:
+				mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, configurarMapa.porcentajeRellenoFloat, configurarMapa.conBordes);
+				break;
 
-            case Algoritmo.RANDOMWALK_CUEVA:
-                mapa = Algoritmos.GenerarArray(ancho, alto, false);
-                mapa = Algoritmos.RandomWalk_Cueva(mapa, semilla, porcentajeEliminar, bordesSonMuros, movimientoDiagonal);
-                break;
+		case Algoritmo.AUTOMATA_CELULAR_MOORE:
+				mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, configurarMapa.porcentajeRellenoFloat, configurarMapa.conBordes);
+				mapa = Algoritmos.AutomataCelularMoore(mapa, configurarMapa.numeroPasadas);
+				break;
 
-            case Algoritmo.TUNELVERTICAL:
-                mapa = Algoritmos.GenerarArray(ancho, alto, false);
-                mapa = Algoritmos.TunelDireccional(mapa, semilla, anchoMinimo, anchoMaximo, aspereza, desplazamientoMaximo, desplazamiento);
-                break;
+			
+		case Algoritmo.AUTOMATA_CELULAR_VONNEUMAN:
+				mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, configurarMapa.porcentajeRellenoFloat, configurarMapa.conBordes);
+				mapa = Algoritmos.AutomataCelularVonNeuman(mapa, configurarMapa.numeroPasadas, configurarMapa.conBordes);
+				break;
 
-            case Algoritmo.TUNELHORIZONTAL:
-                mapa = Algoritmos.GenerarArray(ancho, alto, false);
-                mapa = Algoritmos.TunelHorizontal(mapa, semilla, anchoMinimo, anchoMaximo, aspereza, desplazamientoMaximo, desplazamiento);
-                break;
+		}
 
-            case Algoritmo.MAPA_ALEATORIO:
-                mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeRelleno, bordesSonMuros);
-                break;
+		VisualizarMapa.DibujarMapa(mapa, mapaDeLosetas, loseta);
+		
+		
 
-            case Algoritmo.AUTOMATA_CELULARMOORE:
-                mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeRelleno, bordesSonMuros);
-                mapa = Algoritmos.AutomataCelularMoore(mapa, totalPasadas, bordesSonMuros);
-                break;
+		
+		
 
-            case Algoritmo.AUTOMATA_CELULAR_VONNEUMAN:
-                mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, porcentajeRelleno, bordesSonMuros);
-                mapa = Algoritmos.AutomataCelularVonNeuman(mapa, totalPasadas, bordesSonMuros);
-                break;
 
-        }
 
-        // dibujar el mapa
-        VisualizarMapa.MostrarMapa(mapa, mapaDeLosetas, loseta);
-    }
+	}
 
-    public void LimpiarMapa()
-    {
-        Debug.Log("Estoy en LIMPIAR mapa");
+	
+	//------------------------------------------------------------------------------------------
+	public void LimpiarMapa()
+	{
+		Debug.Log("Limpiando mapa") ;
 
-        VisualizarMapa.LimpiarMapa(mapaDeLosetas);
-    }
+		mapaDeLosetas.ClearAllTiles();
+
+	}
+
+	//------------------------------------------------------------------------------------------
 }

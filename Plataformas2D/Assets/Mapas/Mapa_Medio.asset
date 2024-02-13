@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b3fea777826214d9fe4405c5797013, type: 3}
+  m_Name: Mapa_Medio
+  m_EditorClassIdentifier: 
+  algoritmo: 12
+  semillaAleatoria: 1
+  semilla: 0
+  porcentajeRelleno: 0
+  porcentajeSuavizar: 0
+  porcentajeEliminar: 0
+  intervalo: 1
+  desplazamientoX: 0
+  desplazamientoY: 0
+  diagonal: 0
+  minAncho: 1
+  maxAncho: 3
+  maxCambio: 2
+  aspereza: 1
+  movimiento: 43
+  conBordes: 1
+  modificador: 0.177
+  desplazamientoMax: 3
+  desplazamiento: 0.146
+  porcentajeRellenoFloat: 0.46
+  numeroPasadas: 0

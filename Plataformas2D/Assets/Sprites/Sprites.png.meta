@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 1e5a6f9427174a548ac56236fdaa0435
+guid: 5ccfed64ac3ecf04aad19ab296c4148c
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 4773600122041589604
+    second: SueloCespedIzquierdo
+  - first:
+      213: -4789670105439411607
+    second: SueloCesped
+  - first:
+      213: 7061801754131594114
+    second: SueloCespedDerecho
+  - first:
+      213: -7377819553374844296
+    second: Suelo
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -20,12 +32,11 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
-    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMipmapLimit: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -37,8 +48,8 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
@@ -64,20 +75,18 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -85,12 +94,23 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -98,19 +118,42 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Claro_Hierba_Izq
+      name: SueloCespedIzquierdo
       rect:
         serializedVersion: 2
         x: 70
@@ -118,20 +161,20 @@ TextureImporter:
         width: 70
         height: 70
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f4eff2f9c22df24a9c27d3aa3854aa9
-      internalID: 1286415712
+      spriteID: 46fdc06f40c3f3240800000000000000
+      internalID: 4773600122041589604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Claro_Hierba
+      name: SueloCesped
       rect:
         serializedVersion: 2
         x: 140
@@ -139,20 +182,20 @@ TextureImporter:
         width: 70
         height: 70
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f56a9a920c2ffd3469e4b10c361c8b46
-      internalID: 122960654
+      spriteID: 962e9f57a6ca78db0800000000000000
+      internalID: -4789670105439411607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Claro_Hierba_Der
+      name: SueloCespedDerecho
       rect:
         serializedVersion: 2
         x: 210
@@ -160,20 +203,20 @@ TextureImporter:
         width: 70
         height: 70
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54dfcb513d47bbf4c99e8784738561e3
-      internalID: -798480503
+      spriteID: 28b7e35c74f800260800000000000000
+      internalID: 7061801754131594114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Claro_Relleno
+      name: Suelo
       rect:
         serializedVersion: 2
         x: 140
@@ -181,14 +224,14 @@ TextureImporter:
         width: 70
         height: 70
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25eb898830a284140b171dd9706f7eb1
-      internalID: 144172646
+      spriteID: 87a4920a438bc9990800000000000000
+      internalID: -7377819553374844296
       vertices: []
       indices: 
       edges: []
@@ -204,17 +247,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Claro_Der: 216166546
-      Claro_Hierba: 122960654
-      Claro_Hierba_Der: -798480503
-      Claro_Hierba_Izq: 1286415712
-      Claro_Izq: 500674197
-      Claro_Relleno: 144172646
-      Sprites_5: -444582955
-      Sprites_7: 1159717150
-      Sprites_8: 1733330083
-  mipmapLimitGroupName: 
+      SueloCesped: -4789670105439411607
+      SueloCespedDerecho: 7061801754131594114
+      Suelo: -7377819553374844296
+      SueloCespedIzquierdo: 4773600122041589604
+  spritePackingTag: 
   pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
