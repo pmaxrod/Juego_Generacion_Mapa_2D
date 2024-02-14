@@ -14,15 +14,13 @@ public class Algoritmos
     /// <param name="_alto"> al to del mapa 2D</param>
     /// <param name="_vacio"> Verdadero si queremos iniciarlizarlo a cero. Si no a uno.</param>
     /// <returns> El mapa 2D generado</returns>
-    public static int[,] GenerarArray(int _ancho, int _alto, bool _vacio)
+    public static int[,] GenerarArray(int [,] _mapa, int _ancho, int _alto, bool _vacio)
     {
-        int[,] mapa = new int[_ancho, _alto];
-
         for (int x = 0; x < _ancho; x++)
         {
             for (int y = 0; y < _alto; y++)
             {
-                mapa[x, y] = _vacio ? 0 : 1;
+                _mapa[x, y] = _vacio ? 0 : 1;
                 /*
                  if (_vacio)
                     mapa[x, y] = 0;
@@ -31,7 +29,7 @@ public class Algoritmos
                 */
             }
         }
-        return mapa;
+        return _mapa;
     }
 
     #region algoritmos_simples
@@ -199,7 +197,7 @@ public class Algoritmos
     #region cuevas
 
     //------------------------------------------------------------------
-    public static int[,] PerlinNoise_Cueva(int[,] _mapa, float _modificador, bool _bordesSonMuros)
+    public static int[,] PerlinNoise_Cueva(int[,] _mapa, float _semilla, float _modificador, bool _bordesSonMuros)
     {
         // almacena si hay que poner hueco o suelo
 
@@ -219,7 +217,7 @@ public class Algoritmos
                 else
                 {
                     // se redonde el resultado de la funcion PerlinNoise
-                    nuevoPunto = Mathf.RoundToInt(Mathf.PerlinNoise(x * _modificador, y * _modificador));
+                    nuevoPunto = Mathf.RoundToInt(Mathf.PerlinNoise(x * _modificador + _semilla, y * _modificador + _semilla));
                     _mapa[x, y] = nuevoPunto;
                 }
             }
@@ -239,8 +237,7 @@ public class Algoritmos
     /// <param name="_offSetY">Desplazamiento en Y para el Perlin Noise</param>
     /// <param name="_semilla">Se usara para situarnos en un X,Y  (X = Y = semilla) en el Perlin Noise</param>
     /// <returns>El mapa con la cueva generada con el Perlin Noise</returns>
-    public static int[,] PerlinNoise_Cueva(int[,] _mapa, float _modificador, bool _bordesSonMuros,
-        float _offSetX = 0f, float _offSetY = 0f, float _semilla = 0f)
+    public static int[,] PerlinNoise_Cueva(int[,] _mapa, float _semilla, float _modificador, bool _bordesSonMuros, float _offSetX = 0f, float _offSetY = 0f)
     {
         // almacena si hay que poner hueco o suelo
 
@@ -358,7 +355,9 @@ public class Algoritmos
 
         return _mapa;
     }
-
+    #endregion
+	
+	#region tuneles
     //-------------------------------------------------------------------
     public static int[,] TunelDireccional(int[,] _mapa, float _semilla, int _anchoMin,
         int _anchoMax, float _aspereza, int _desplazamientoMax, float _desplazamiento)
@@ -468,7 +467,7 @@ public class Algoritmos
         return _mapa;
     }
     #endregion
-    
+	
     #region automatas_celulares
     //--------------------------------------------------------------------------------
     public static int[,] GenerarMapaAleatorio(int _ancho, int _alto, float _semilla,
@@ -521,16 +520,51 @@ public class Algoritmos
                     // N    N    N 
                     // N    T    N
                     // N    N    N
-
-                    if ((vecinoX != _x || vecinoY != _y) && (_incluirDiagonales || (vecinoX == _x || vecinoY == _y)))
+					//totalVecinas += _mapa[vecinoX, vecinoY];
+                    
+					if ((vecinoX != _x || vecinoY != _y) && (_incluirDiagonales || vecinoX == _x || vecinoY == _y))
                     {
                         // sumar las casillas que tienen 1, y así sabremos las casillas que tienen vecinas
                         totalVecinas += _mapa[vecinoX, vecinoY];
                     }
                 }
             }
+			Debug.Log(totalVecinas);
         }
         return totalVecinas;
+    }
+
+    public static int[,] AutomataCelular(int[,] _mapa, int _totalDePasadas, bool _bordesSonMuros, int _totalVecinas, bool _incluyeDiagonales)
+    {
+        for (int i = 0; i < _totalDePasadas; i++)
+        {
+            for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
+            {
+                for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
+                {
+                    // Incluye las diagonales
+					int totalVecinas = 0;
+                    // totalVecinas = LosetasVecinas(_mapa, x, y, _incluyeDiagonales);
+
+                    if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) || y == 0 || y == _mapa.GetUpperBound(1)))
+                    {
+                        _mapa[x, y] = 1;
+                    }
+                    // Si tenemos más de _totalVecinas vecinos, ponemos suelo - VIVE
+                    else if (totalVecinas > _totalVecinas)
+                    {
+                        _mapa[x, y] = 1;
+                    }
+                    else if (totalVecinas < _totalVecinas)
+                    {
+                        _mapa[x, y] = 0;
+                    }
+
+                    // si tenemos exactamente _totalVecinas vecinos, no cambiamos nada
+                }
+            }
+        }
+        return _mapa;
     }
 
     public static int[,] AutomataCelularMoore(int[,] _mapa, int _totalDePasadas, bool _bordesSonMuros)
@@ -574,7 +608,7 @@ public class Algoritmos
                 for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
                 {
                     // Incluye las diagonales
-                    int totalVecinas = LosetasVecinas(_mapa, x, y, false);
+                    int totalVecinas = LosetasVecinas(_mapa, x, y, true);
 
                     if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) || y == 0 || y == _mapa.GetUpperBound(1)))
                     {

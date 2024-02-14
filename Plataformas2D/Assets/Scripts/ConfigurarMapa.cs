@@ -28,9 +28,7 @@ public enum Algoritmo
 	RANDOMWALK_CUEVA_MODIFICADO,
 
 	TUNEL_VERTICAL,
-	TUNEL_VERTICAL_MODIFICADO,
 	TUNEL_HORIZONTAL,
-	TUNEL_HORIZONTAL_MODIFICADO,
 
 	MAPA_ALEATORIO,
 	AUTOMATA_CELULAR_MOORE,
@@ -138,30 +136,12 @@ public class ConfigurarMapaEditor : Editor
                 capaMapa.movimiento = EditorGUILayout.IntSlider(new GUIContent("Movimiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.movimiento, 0, 100);
                 break;
 
-            case Algoritmo.TUNEL_VERTICAL_MODIFICADO:
-                capaMapa.minAncho = EditorGUILayout.IntField("Ancho minimo", capaMapa.minAncho);
-                capaMapa.maxAncho = EditorGUILayout.IntField("Ancho maximo", capaMapa.maxAncho);
-                capaMapa.maxCambio = EditorGUILayout.IntField("Maximo cambio", capaMapa.maxCambio);
-                capaMapa.aspereza = EditorGUILayout.IntSlider(new GUIContent("Aspereza", "Esto se compara con un numero aleatorio para determinar si podemos cambiar la posicion x actual de la ruta."), capaMapa.aspereza, 0, 100);
-                capaMapa.desplazamientoMax = EditorGUILayout.IntField(new GUIContent("Desplazamiento maximo", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.desplazamientoMax);
-                capaMapa.desplazamiento = EditorGUILayout.Slider(new GUIContent("Desplazamiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del t�nel."), capaMapa.desplazamiento, 0f, 1f);
-                break;
-
             case Algoritmo.TUNEL_HORIZONTAL:
                 capaMapa.minAncho = EditorGUILayout.IntField("Ancho minimo", capaMapa.minAncho);
                 capaMapa.maxAncho = EditorGUILayout.IntField("Ancho maximo", capaMapa.maxAncho);
                 capaMapa.maxCambio = EditorGUILayout.IntField("Maximo cambio", capaMapa.maxCambio);
                 capaMapa.aspereza = EditorGUILayout.IntSlider(new GUIContent("Aspereza", "Esto se compara con un numero aleatorio para determinar si podemos cambiar la posicion x actual de la ruta."), capaMapa.aspereza, 0, 100);
                 capaMapa.movimiento = EditorGUILayout.IntSlider(new GUIContent("Movimiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.movimiento, 0, 100);
-                break;
-
-            case Algoritmo.TUNEL_HORIZONTAL_MODIFICADO:
-                capaMapa.minAncho = EditorGUILayout.IntField("Ancho minimo", capaMapa.minAncho);
-                capaMapa.maxAncho = EditorGUILayout.IntField("Ancho maximo", capaMapa.maxAncho);
-                capaMapa.maxCambio = EditorGUILayout.IntField("Maximo cambio", capaMapa.maxCambio);
-                capaMapa.aspereza = EditorGUILayout.IntSlider(new GUIContent("Aspereza", "Esto se compara con un numero aleatorio para determinar si podemos cambiar la posicion x actual de la ruta."), capaMapa.aspereza, 0, 100);
-                capaMapa.desplazamientoMax = EditorGUILayout.IntField(new GUIContent("Desplazamiento maximo", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.desplazamientoMax);
-                capaMapa.desplazamiento = EditorGUILayout.Slider(new GUIContent("Desplazamiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.desplazamiento, 0f, 1f);
                 break;
 
             case Algoritmo.MAPA_ALEATORIO:
