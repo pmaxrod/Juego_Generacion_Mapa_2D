@@ -141,22 +141,22 @@ public class Generador : MonoBehaviour
 
 		case Algoritmo.PERLINNOISE_CUEVA:
 				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
-				mapa = Algoritmos.PerlinNoise_Cueva(mapa, semilla, configurarMapa.modificador, configurarMapa.conBordes);
+				mapa = Algoritmos.PerlinNoiseCueva(mapa, semilla, configurarMapa.modificador, configurarMapa.conBordes);
 				break;
 					
 		case Algoritmo.PERLINNOISE_CUEVA_MODIFICADO:
 				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
-				mapa = Algoritmos.PerlinNoise_Cueva(mapa, semilla, configurarMapa.modificador, configurarMapa.conBordes, configurarMapa.desplazamientoX, configurarMapa.desplazamientoY);
+				mapa = Algoritmos.PerlinNoiseCueva(mapa, semilla, configurarMapa.modificador, configurarMapa.conBordes, configurarMapa.desplazamientoX, configurarMapa.desplazamientoY);
 				break;
 
 		case Algoritmo.RANDOMWALK_CUEVA:
 				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
-				mapa = Algoritmos.RandomWalk_Cueva(mapa, semilla, configurarMapa.porcentajeEliminar);
+				mapa = Algoritmos.RandomWalkCueva(mapa, semilla, configurarMapa.porcentajeEliminar);
 				break;
 
 		case Algoritmo.TUNEL_VERTICAL:
 				mapa = Algoritmos.GenerarArray(mapa, ancho, alto, false);
-				mapa = Algoritmos.TunelDireccional(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza, configurarMapa.desplazamientoMax, configurarMapa.desplazamiento);
+				mapa = Algoritmos.TunelVertical(mapa, semilla, configurarMapa.minAncho, configurarMapa.maxAncho, configurarMapa.aspereza, configurarMapa.desplazamientoMax, configurarMapa.desplazamiento);
 				break;
 
 		case Algoritmo.TUNEL_HORIZONTAL:
@@ -170,12 +170,12 @@ public class Generador : MonoBehaviour
 
 		case Algoritmo.AUTOMATA_CELULAR_MOORE:
 				mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, configurarMapa.porcentajeRellenoFloat, configurarMapa.conBordes);
-				mapa = Algoritmos.AutomataCelular(mapa, configurarMapa.numeroPasadas, configurarMapa.conBordes, 4, false);
+				mapa = Algoritmos.AutomataCelular(mapa, configurarMapa.numeroPasadas, configurarMapa.conBordes, 4, true);
 				break;
 
 		case Algoritmo.AUTOMATA_CELULAR_VONNEUMAN:
 				mapa = Algoritmos.GenerarMapaAleatorio(ancho, alto, semilla, configurarMapa.porcentajeRellenoFloat, configurarMapa.conBordes);
-				mapa = Algoritmos.AutomataCelular(mapa, configurarMapa.numeroPasadas, configurarMapa.conBordes, 2, true);
+				mapa = Algoritmos.AutomataCelular(mapa, configurarMapa.numeroPasadas, configurarMapa.conBordes, 2, false);
 				break;
         }
 

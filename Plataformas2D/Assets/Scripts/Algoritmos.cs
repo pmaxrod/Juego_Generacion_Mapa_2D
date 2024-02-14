@@ -197,7 +197,7 @@ public class Algoritmos
     #region cuevas
 
     //------------------------------------------------------------------
-    public static int[,] PerlinNoise_Cueva(int[,] _mapa, float _semilla, float _modificador, bool _bordesSonMuros)
+    public static int[,] PerlinNoiseCueva(int[,] _mapa, float _semilla, float _modificador, bool _bordesSonMuros)
     {
         // almacena si hay que poner hueco o suelo
 
@@ -226,9 +226,9 @@ public class Algoritmos
     }
 
     //-------------------------------------------------------------------------------------------
-    // desplazar el mapa seg�n los valores de los offSet
+    // desplazar el mapa segun los valores de los offSet
     /// <summary>
-    /// Crea una cueva usando el Perlin Noise para el proceso de generaci�n
+    /// Crea una cueva usando el Perlin Noise para el proceso de generacion
     /// </summary>
     /// <param name="_mapa"> El mapa que se va a modificar</param>
     /// <param name="_modificador">El valor por el cual multiplicamos la posicion para obtener un valor del Perlin Noise. Mapa mas grande o mas pequeno</param>
@@ -237,7 +237,7 @@ public class Algoritmos
     /// <param name="_offSetY">Desplazamiento en Y para el Perlin Noise</param>
     /// <param name="_semilla">Se usara para situarnos en un X,Y  (X = Y = semilla) en el Perlin Noise</param>
     /// <returns>El mapa con la cueva generada con el Perlin Noise</returns>
-    public static int[,] PerlinNoise_Cueva(int[,] _mapa, float _semilla, float _modificador, bool _bordesSonMuros, float _offSetX = 0f, float _offSetY = 0f)
+    public static int[,] PerlinNoiseCueva(int[,] _mapa, float _semilla, float _modificador, bool _bordesSonMuros, float _offSetX = 0f, float _offSetY = 0f)
     {
         // almacena si hay que poner hueco o suelo
 
@@ -267,7 +267,7 @@ public class Algoritmos
     }
 
     //--------------------------------------------------------------------
-    public static int[,] RandomWalk_Cueva(int[,] _mapa, float _semilla, float _porcentajeSueloEliminar,
+    public static int[,] RandomWalkCueva(int[,] _mapa, float _semilla, float _porcentajeSueloEliminar,
         bool _bordesSonMuros = true, bool _movDiagonal = false)
     {
         // Las semilla de nuestro Random
@@ -298,7 +298,7 @@ public class Algoritmos
         int posY = Random.Range(vMin, vMaxY);
 
         // redondeamos el valor
-        int cantidadLosetasEliminar = Mathf.FloorToInt(ancho * alto * _porcentajeSueloEliminar);
+        int cantidadLosetasEliminar = Mathf.FloorToInt(ancho * alto * _porcentajeSueloEliminar / 100);
 
         // para contar las losetas que llevamos eliminadas
         int losetasEliminadas = 0;
@@ -359,7 +359,7 @@ public class Algoritmos
 	
 	#region tuneles
     //-------------------------------------------------------------------
-    public static int[,] TunelDireccional(int[,] _mapa, float _semilla, int _anchoMin,
+    public static int[,] TunelVertical(int[,] _mapa, float _semilla, int _anchoMin,
         int _anchoMax, float _aspereza, int _desplazamientoMax, float _desplazamiento)
     {
         // este valor va desde su valor en negativo hasta el valor positivo
@@ -367,8 +367,8 @@ public class Algoritmos
         int anchoTunel = 1;
 
         // posicion de comienzo del mapa
-        //int x = _mapa.GetUpperBound(0) / 2; // la mitad del mapa
-        int x = Random.Range(0, _mapa.GetUpperBound(0)); // 
+        int x = _mapa.GetUpperBound(0) / 2; // la mitad del mapa
+        //int x = Random.Range(0, _mapa.GetUpperBound(0)); // 
 
         // la semilla de nuestro random
         Random.InitState(_semilla.GetHashCode());
@@ -503,33 +503,35 @@ public class Algoritmos
         // contar las losetas vecinas
         int totalVecinas = 0;
 
+        // recorrer las losetas vecinas de esta posici�n
         for (int vecinoX = _x - 1; vecinoX <= _x + 1; vecinoX++)
         {
-            for (int vecinoY = _y - 1; vecinoX <= _y + 1; vecinoY++)
+            for (int vecinoY = _y - 1; vecinoY <= _y + 1; vecinoY++)
             {
+                // comprorbar que estamos dentro del mapa
                 if (vecinoX >= 0 && vecinoX <= _mapa.GetUpperBound(0) && vecinoY >= 0 && vecinoY <= _mapa.GetUpperBound(1))
                 {
-                    // ignorar la posición de central (_x,_y)
-
+                    // ignorar la posici�n de central (_x,_y)
                     // sin incluir las diagonales
-                    //      N 
-                    // N    T    N
-                    //      N
+                    //
+                    //   N
+                    // N T N
+                    //   N
+                    //
+                    // incluyendo las diagonales --> incluirDiagonales = true
+                    //
+                    // N N N
+                    // N T N
+                    // N N N
+                    // 
 
-                    // incluyendo las diagonales
-                    // N    N    N 
-                    // N    T    N
-                    // N    N    N
-					//totalVecinas += _mapa[vecinoX, vecinoY];
-                    
-					if ((vecinoX != _x || vecinoY != _y) && (_incluirDiagonales || vecinoX == _x || vecinoY == _y))
+                    if ((vecinoX != _x || vecinoY != _y) && (_incluirDiagonales || (vecinoX == _x || vecinoY == _y)))
                     {
-                        // sumar las casillas que tienen 1, y así sabremos las casillas que tienen vecinas
+                        // sumar las casillas que tienen 1, y as� sabremos las casillas vecinas que tienen vecinas
                         totalVecinas += _mapa[vecinoX, vecinoY];
                     }
                 }
             }
-			Debug.Log(totalVecinas);
         }
         return totalVecinas;
     }
@@ -544,7 +546,7 @@ public class Algoritmos
                 {
                     // Incluye las diagonales
 					int totalVecinas = 0;
-                    // totalVecinas = LosetasVecinas(_mapa, x, y, _incluyeDiagonales);
+                    totalVecinas = LosetasVecinas(_mapa, x, y, _incluyeDiagonales);
 
                     if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) || y == 0 || y == _mapa.GetUpperBound(1)))
                     {
@@ -561,70 +563,6 @@ public class Algoritmos
                     }
 
                     // si tenemos exactamente _totalVecinas vecinos, no cambiamos nada
-                }
-            }
-        }
-        return _mapa;
-    }
-
-    public static int[,] AutomataCelularMoore(int[,] _mapa, int _totalDePasadas, bool _bordesSonMuros)
-    {
-        for (int i = 0; i < _totalDePasadas; i++)
-        {
-            for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
-                {
-                    // Incluye las diagonales
-                    int totalVecinas = LosetasVecinas(_mapa, x, y, true);
-
-                    if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) || y == 0 || y == _mapa.GetUpperBound(1)))
-                    {
-                        _mapa[x, y] = 1;
-                    }
-                    // Si tenemos más de 4 vecinos, ponemos suelo - VIVE
-                    else if (totalVecinas > 4)
-                    {
-                        _mapa[x, y] = 1;
-                    }
-                    else if (totalVecinas < 4)
-                    {
-                        _mapa[x, y] = 0;
-                    }
-
-                    // si tenemos exactamente 4 vecinos, no cambiamos nada
-                }
-            }
-        }
-        return _mapa;
-    }
-
-    public static int[,] AutomataCelularVonNeuman(int[,] _mapa, int _totalDePasadas, bool _bordesSonMuros)
-    {
-        for (int i = 0; i < _totalDePasadas; i++)
-        {
-            for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
-                {
-                    // Incluye las diagonales
-                    int totalVecinas = LosetasVecinas(_mapa, x, y, true);
-
-                    if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) || y == 0 || y == _mapa.GetUpperBound(1)))
-                    {
-                        _mapa[x, y] = 1;
-                    }
-                    // Si tenemos más de 2 vecinos, ponemos suelo - VIVE
-                    else if (totalVecinas > 2)
-                    {
-                        _mapa[x, y] = 1;
-                    }
-                    else if (totalVecinas < 2)
-                    {
-                        _mapa[x, y] = 0;
-                    }
-
-                    // si tenemos exactamente 2 vecinos, no cambiamos nada
                 }
             }
         }
