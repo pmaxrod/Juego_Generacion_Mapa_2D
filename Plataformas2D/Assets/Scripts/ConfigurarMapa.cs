@@ -36,7 +36,7 @@ public enum Algoritmo
 }
 
 [System.Serializable]
-[CreateAssetMenu(fileName = "NuevoMapa", menuName = "Configurar Mapa", order = 0)]
+[CreateAssetMenu(fileName = "NuevoMapa", menuName = "Objetos/Configurar Mapa", order = 0)]
 
 
 public class ConfigurarMapa : ScriptableObject

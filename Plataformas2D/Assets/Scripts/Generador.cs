@@ -26,6 +26,8 @@ public class Generador : MonoBehaviour
 
 	[Tooltip("La configuracion del mapa")]
 	public ConfigurarMapa configurarMapa;
+    [Tooltip("Los algoritmos a escoger")]
+    public AlgoritmosMapa algoritmosMapa;
 
     int[,] mapa;
 /*
@@ -105,8 +107,10 @@ public class Generador : MonoBehaviour
 
         LimpiarMapa();
 
-		// Generar semilla nueva de forma aleatoria
-		if (configurarMapa.semillaAleatoria == true)
+        configurarMapa.algoritmo = algoritmosMapa.AlgoritmoAleatorio();
+
+        // Generar semilla nueva de forma aleatoria
+        if (configurarMapa.semillaAleatoria == true)
 		{
 			semilla = Random.Range(0f, 1000f);
 		}
