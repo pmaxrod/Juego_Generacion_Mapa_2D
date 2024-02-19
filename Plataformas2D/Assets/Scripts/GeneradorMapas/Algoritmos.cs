@@ -181,7 +181,7 @@ public class Algoritmos
                 // empezamos una nueva seccion de suelo con la misma altura
                 anchoSeccion = 0; // volvemo a poner a cero la seccion
             }
-            //Henmos procesado otro bloque de la seccion actual
+            //Hemos procesado otro bloque de la seccion actual
             anchoSeccion++;
 
             // rellenamos de suelo desde la ultimaAltura hasta abajo
