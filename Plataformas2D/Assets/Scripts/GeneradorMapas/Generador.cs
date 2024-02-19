@@ -15,14 +15,14 @@ public class Generador : MonoBehaviour
 	[Header("Referencias")]
 	[Tooltip("El Tilemap para dibujar el mapa")]
 	[SerializeField] private Tilemap mapaDeLosetas;
-	[Tooltip("El mosaico para dibujar(usa un Rule Tile para obtener mejores resultados)")]
+	[Tooltip("El mosaico para dibujar (usa un Rule Tile para obtener mejores resultados)")]
 	[SerializeField] private TileBase loseta;
 	
 	[Header("Dimensiones mapa")]
 	[Tooltip("Ancho del mapa")]
 	[SerializeField] private int ancho = 60;
 	[Tooltip("Alto del mapa")]
-	[SerializeField] private int alto = 34;
+	[SerializeField] private int alto = 40;
 
 	[Tooltip("La configuracion del mapa")]
 	public ConfigurarMapa configurarMapa;
@@ -30,71 +30,23 @@ public class Generador : MonoBehaviour
     public AlgoritmosMapa algoritmosMapa;
 
     int[,] mapa;
-/*
-    [Header("Semilla")]
-    [SerializeField] private bool semillaAleatoria = true;
-    [SerializeField] private float semilla = 0f;
-
-    [Header("Perlin Noise suavizado")]
-    [SerializeField] private int intervalo = 1;
-
-    [Header("Algoritmo - RandomWalk suavizado")]
-    [SerializeField] private int minimoAnchoSeccion = 2;
-
-    [Header("Cuevas")]
-    [SerializeField] private bool bordesSonMuros = true;
-
-    [Header("PerlinNoise Cuevas")]
-    [SerializeField] private float modificador = 0.1f;
-    [SerializeField] private float offSetX = 0f;
-    [SerializeField] private float offSetY = 0f;
-
-
-    [Header("RandomWalk Cueva")]
-    [Range(0, 1)] // para asegurarnos que esta entre 0 y 1
-    [SerializeField] private float porcentajeEliminar = 0.25f; //  25 %
-    [SerializeField] private bool movimientoDiagonal = false;
-
-    [Header("Tunel Direccional")]
-    [SerializeField] private int anchoMaximo = 4;
-    [SerializeField] private int anchoMinimo = 1; // se quitar� 3 bloques
-
-    [Range(0, 1)] // para asegurarnos que esta entre 0 y 1
-    [SerializeField] private float aspereza = 0.75f;
-
-    [SerializeField] private int desplazamientoMaximo = 1;
-
-    [Range(0, 1)] // para asegurarnos que esta entre 0 y 1
-    [SerializeField] private float desplazamiento = 0.75f;
-
-
-    [Header("Automata celular")]
-    [Range(0, 1)]
-    [SerializeField] private float porcentajeRelleno = 0.45f;
-    [SerializeField] private int totalPasadas = 1;
-
-    [Header("Elegir Algoritmo")]
-    [SerializeField] private Algoritmo algoritmo = Algoritmo.PERLIN_NOISE;
-	*/
-
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        /*if (Input.GetKeyDown(KeyCode.G))
         {
             GenerarMapa();
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             LimpiarMapa();
-        }
+        }*/
     }
 
 	[ExecuteInEditMode]
@@ -118,8 +70,6 @@ public class Generador : MonoBehaviour
 		{
 			semilla = configurarMapa.semilla;
 		}
-
-        //mapa = Algoritmos.GenerarArray(ancho, alto, false);
 
         switch (configurarMapa.algoritmo)
         {

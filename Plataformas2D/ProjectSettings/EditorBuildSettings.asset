@@ -8,4 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Inicio.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Escenas2D/EscenaPerlin.unity
+    guid: 3af7907d63c9f5342bce30070905117b
+  - enabled: 1
+    path: Assets/Scenes/Escenas2D/EscenaTunel.unity
+    guid: d7df6bb634e3bf54096d58e570207126
+  - enabled: 1
+    path: Assets/Scenes/Escenas2D/EscenaAutomata.unity
+    guid: fcac735a8fe67894aa2d75aadec8fdb3
+  - enabled: 1
+    path: Assets/Scenes/Fin.unity
+    guid: 5e8c5d0ef69d4644c831392ac4f05b27
   m_configObjects: {}
