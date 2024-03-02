@@ -5,10 +5,11 @@ using UnityEngine;
 public class InstanciarMapaEscena : MonoBehaviour
 {
     [SerializeField] private Generador generador;
-    [SerializeField] private GameObject personaje;
-    [Header("Coordenadas X e Y")]
-    [SerializeField] private float xPersonaje;
-    [SerializeField] private float yPersonaje;
+    [Tooltip("Personaje")]
+    [SerializeField] private ObjetoMapa personaje;
+
+    [Tooltip("Moneda")]
+    [SerializeField] private ObjetoMapa moneda;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,8 @@ public class InstanciarMapaEscena : MonoBehaviour
         generador.GenerarMapa();
 
         InstanciarPersonaje();
+
+        InstanciarMonedas();
     }
 
     // Update is called once per frame
@@ -26,8 +29,23 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     private void InstanciarPersonaje()
     {
-        personaje.transform.position = new Vector2(xPersonaje, yPersonaje);
+        GameObject personajeInst = personaje.objeto;
 
-        Instantiate(personaje, personaje.transform);
+        personaje.objeto.transform.position = new Vector2(personaje.GetX(), personaje.GetY());
+
+        Instantiate(personaje.objeto, personaje.objeto.transform);
+    }
+
+    private void InstanciarMonedas()
+    {
+        DatosObjeto datos = moneda.datos;
+
+        moneda.objeto.transform.position = new Vector2(moneda.GetX(), moneda.GetY());
+
+        for (int i = 0; i < datos.cantidad; i++)
+        {
+            Instantiate(moneda.objeto, moneda.objeto.transform);
+        }
+
     }
 }
