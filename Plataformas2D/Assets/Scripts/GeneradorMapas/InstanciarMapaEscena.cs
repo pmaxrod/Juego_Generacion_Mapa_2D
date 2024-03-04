@@ -53,7 +53,17 @@ public class InstanciarMapaEscena : MonoBehaviour
             {
                 for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
                 {
-                    if (_mapa[x, y] == 1 && (x <= _mapa.GetUpperBound(0) || y <= _mapa.GetUpperBound(1)))
+                    int totalVecinas = Algoritmos.LosetasVecinas(_mapa, x, y, true);
+
+                    if (totalVecinas <= 4)
+                    {
+                        nuevaPosicion = new Vector2(moneda.GetX() + offsetX + 4, moneda.GetY() + offsetY + 4);
+                    }
+                    else
+                    {
+                        nuevaPosicion = new Vector2(moneda.GetX() + offsetX - 4, moneda.GetY() + offsetY - 4);
+                    }
+/*                    if (_mapa[x, y] == 1 && (x <= _mapa.GetUpperBound(0) || y <= _mapa.GetUpperBound(1)))
                     {
                         nuevaPosicion = new Vector2(moneda.GetX() + offsetX + 1, moneda.GetY() + offsetY + 1);
                     }
@@ -61,6 +71,7 @@ public class InstanciarMapaEscena : MonoBehaviour
                     {
                         nuevaPosicion = new Vector2(moneda.GetX() + offsetX - 1, moneda.GetY() + offsetY - 1);
                     }
+*/
                     moneda.objeto.transform.position = nuevaPosicion;
                 }
             }
