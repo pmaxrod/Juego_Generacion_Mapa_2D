@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b3fea777826214d9fe4405c5797013, type: 3}
   m_Name: ConfiguracionMapa
   m_EditorClassIdentifier: 
-  algoritmo: 5
+  algoritmo: 1
   semillaAleatoria: 1
   semilla: 30
   porcentajeRelleno: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   aspereza: 1
   movimiento: 13
   conBordes: 1
-  modificador: 0.15
+  modificador: 0.25
   desplazamientoMax: 1
   desplazamiento: 0.11
   porcentajeRellenoFloat: 0.375

@@ -6,10 +6,12 @@ public class InstanciarMapaEscena : MonoBehaviour
 {
     [SerializeField] private Generador generador;
     [Tooltip("Personaje")]
-    [SerializeField] private ObjetoMapa personaje;
+    [SerializeField] private GameObject personaje;
 
     [Tooltip("Moneda")]
-    [SerializeField] private ObjetoMapa moneda;
+    [SerializeField] private GameObject moneda;
+    [Tooltip("Cantidad de monedas")]
+    [SerializeField] private int cantidadMonedas;
 
     // Start is called before the first frame update
     void Start()
@@ -29,54 +31,54 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     private void InstanciarPersonaje(int[,] _mapa)
     {
-        GameObject personajeInst = personaje.objeto;
+        personaje.transform.position = PosicionProcedural(_mapa, personaje);
 
-        personaje.objeto.transform.position = new Vector2(personaje.GetX(), personaje.GetY());
-
-        Instantiate(personaje.objeto, personaje.objeto.transform);
+        Instantiate(personaje, personaje.transform);
     }
 
     private void InstanciarMonedas(int[,] _mapa)
     {
-        DatosObjeto datos = moneda.datos;
+        for (int i = 0; i < cantidadMonedas; i++)
+        {            
+            moneda.transform.position = PosicionProcedural(_mapa, moneda);
 
-        for (int i = 0; i < datos.cantidad; i++)
-        {
-            float offsetX = Random.Range(0, _mapa.GetUpperBound(0));
-            float offsetY = Random.Range(0, _mapa.GetUpperBound(1));
-
-            Vector2 nuevaPosicion = new Vector2(moneda.GetX() + offsetX, moneda.GetY() + offsetY);
-
-            moneda.objeto.transform.position = nuevaPosicion;
-
-            for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
-                {
-                    int totalVecinas = Algoritmos.LosetasVecinas(_mapa, x, y, true);
-
-                    if (totalVecinas <= 4)
-                    {
-                        nuevaPosicion = new Vector2(moneda.GetX() + offsetX + 4, moneda.GetY() + offsetY + 4);
-                    }
-                    else
-                    {
-                        nuevaPosicion = new Vector2(moneda.GetX() + offsetX - 4, moneda.GetY() + offsetY - 4);
-                    }
-/*                    if (_mapa[x, y] == 1 && (x <= _mapa.GetUpperBound(0) || y <= _mapa.GetUpperBound(1)))
-                    {
-                        nuevaPosicion = new Vector2(moneda.GetX() + offsetX + 1, moneda.GetY() + offsetY + 1);
-                    }
-                    else if (_mapa[x, y] == 1 && (x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
-                    {
-                        nuevaPosicion = new Vector2(moneda.GetX() + offsetX - 1, moneda.GetY() + offsetY - 1);
-                    }
-*/
-                    moneda.objeto.transform.position = nuevaPosicion;
-                }
-            }
-            Instantiate(moneda.objeto, moneda.objeto.transform);
+            Instantiate(moneda, moneda.transform);
         }
+
+    }
+
+    private Vector2 PosicionProcedural(int[,] _mapa, GameObject _objeto)
+    {
+        int xVector = Random.Range(0, _mapa.GetUpperBound(0));
+        int yVector = 0;
+
+        // Para obtener la altura minima de la moneda
+        for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
+        {
+            for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
+            {
+                if (_mapa[x, y] == 1 && (x == 0 || y == 0 || x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
+                {
+                    yVector = y;
+                }
+
+                if (xVector == x && _mapa[x, y] == 1 && (x == 0 || y == 0 || x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
+                {
+                    xVector--;
+                }
+                else if (xVector == x && _mapa[x, y] == 1 && (x == 0 || y == 0 || x != _mapa.GetUpperBound(0) || y != _mapa.GetUpperBound(1)))
+                {
+                    xVector++;
+                }
+
+            }
+        }
+
+        yVector += Random.Range(0, 10);
+
+        Vector2 nuevaPosicion = new Vector2(xVector, yVector);
+
+        return nuevaPosicion;
 
     }
 }
