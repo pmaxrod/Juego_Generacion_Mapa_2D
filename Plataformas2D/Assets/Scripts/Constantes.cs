@@ -10,4 +10,6 @@ public class Constantes
     public static string ESCENA_AUTOMATA = "EscenaAutomata";
     public static string ESCENA_FIN_JUEGO = "Fin";
 
+    public static string TAG_MONEDA = "Moneda";
+
 }

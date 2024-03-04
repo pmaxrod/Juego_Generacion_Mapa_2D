@@ -219,7 +219,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 15
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -10370,8 +10370,8 @@ Tilemap:
   - m_RefCount: 1015
     m_Data: {fileID: 11400000, guid: 85bf3bf1db4ac9a44a2b996dd7422eaf, type: 2}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 21300032, guid: 6bf3410bfc60f2a4e812f2bafd55dc2b, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 10
     m_Data: {fileID: 21300008, guid: 6bf3410bfc60f2a4e812f2bafd55dc2b, type: 3}
   - m_RefCount: 9
@@ -10400,8 +10400,8 @@ Tilemap:
     m_Data: {fileID: 21300104, guid: 6bf3410bfc60f2a4e812f2bafd55dc2b, type: 3}
   - m_RefCount: 4
     m_Data: {fileID: 21300090, guid: 6bf3410bfc60f2a4e812f2bafd55dc2b, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 21300032, guid: 6bf3410bfc60f2a4e812f2bafd55dc2b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300036, guid: 6bf3410bfc60f2a4e812f2bafd55dc2b, type: 3}
   m_TileMatrixArray:
@@ -10520,7 +10520,7 @@ MonoBehaviour:
     objeto: {fileID: 6662994395591262076, guid: b7c81f9506c22fa49b8566d108ed6842, type: 3}
     datos: {fileID: 11400000, guid: 555253db7d49b964891b6598d127c6ea, type: 2}
   moneda:
-    objeto: {fileID: 9008436328481590292, guid: b0103387b2050534d8fa9d0941032e0b, type: 3}
+    objeto: {fileID: 2018798703324845219, guid: b0103387b2050534d8fa9d0941032e0b, type: 3}
     datos: {fileID: 11400000, guid: a6a54cce53feab64a8b45d23a8a59acd, type: 2}
 --- !u!4 &692583240
 Transform:

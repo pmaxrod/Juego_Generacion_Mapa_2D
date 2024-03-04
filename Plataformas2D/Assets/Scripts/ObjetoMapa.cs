@@ -22,5 +22,4 @@ public class ObjetoMapa
     {
         return datos.cantidad;
     }
-
 }

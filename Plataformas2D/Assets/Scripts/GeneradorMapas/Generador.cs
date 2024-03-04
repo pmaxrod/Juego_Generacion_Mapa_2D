@@ -31,7 +31,7 @@ public class Generador : MonoBehaviour
 
     [Tooltip("Algoritmo aleatorio")]
     public bool algoritmoAleatorio;
-    int[,] mapa;
+    public int[,] mapa;
 
     // Start is called before the first frame update
     void Start()
