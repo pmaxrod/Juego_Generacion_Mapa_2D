@@ -31,7 +31,7 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     private void InstanciarPersonaje(int[,] _mapa)
     {
-        personaje.transform.position = PosicionProcedural(_mapa, personaje);
+        personaje.transform.position = PosicionProcedural(_mapa, personaje, true);
 
         Instantiate(personaje, personaje.transform);
     }
@@ -47,12 +47,17 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     }
 
-    private Vector2 PosicionProcedural(int[,] _mapa, GameObject _objeto)
+    private Vector2 PosicionProcedural(int[,] _mapa, GameObject _objeto, bool _personaje = false)
     {
         int xVector = Random.Range(0, _mapa.GetUpperBound(0));
         int yVector = 0;
 
-        // Para obtener la altura minima de la moneda
+        if (_personaje)
+        {
+            xVector = 0;
+        }
+
+        // Para obtener la altura minima del objeto a instanciar
         for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
@@ -71,10 +76,14 @@ public class InstanciarMapaEscena : MonoBehaviour
                     xVector++;
                 }
 
+                if (personaje && _mapa[0, 0] == 1)
+                {
+
+                }
             }
         }
 
-        yVector += Random.Range(0, 10);
+        yVector += Random.Range(-5, 10);
 
         Vector2 nuevaPosicion = new Vector2(xVector, yVector);
 
