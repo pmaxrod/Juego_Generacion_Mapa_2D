@@ -52,9 +52,10 @@ public class InstanciarMapaEscena : MonoBehaviour
         int xVector = Random.Range(0, _mapa.GetUpperBound(0));
         int yVector = 0;
 
-        if (_personaje)
+        if (_personaje && _mapa[0,0] == 1) { }
         {
-            xVector = 0;
+            xVector = 2;
+            yVector = 2;
         }
 
         // Para obtener la altura minima del objeto a instanciar
@@ -76,10 +77,6 @@ public class InstanciarMapaEscena : MonoBehaviour
                     xVector++;
                 }
 
-                if (personaje && _mapa[0, 0] == 1)
-                {
-
-                }
             }
         }
 
