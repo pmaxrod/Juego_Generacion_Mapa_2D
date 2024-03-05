@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Moneda
+  - FinNivel
   layers:
   - Default
   - TransparentFX

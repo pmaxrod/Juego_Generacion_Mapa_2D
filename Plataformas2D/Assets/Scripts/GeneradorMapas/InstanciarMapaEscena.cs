@@ -127,7 +127,7 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     private Vector2 PosicionProceduralFinNivel(int[,] _mapa)
     {
-        int xVector = _mapa.GetUpperBound(0) / 2;
+        int xVector = _mapa.GetUpperBound(0);
         int yVector = 0;
 
         // Para obtener la altura minima del objeto a instanciar
@@ -135,6 +135,12 @@ public class InstanciarMapaEscena : MonoBehaviour
         {
             for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
             {
+                // Para obtener la altura minima del objeto a instanciar
+                if (_mapa[x, y] == 1 && (x == 0 || y == 0 || x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
+                {
+                    yVector = y;
+                }
+
                 if (xVector == x && _mapa[x, y] == 1 && (x == 0 || y == 0 || x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
                 {
                     xVector--;
@@ -142,6 +148,11 @@ public class InstanciarMapaEscena : MonoBehaviour
                 else if (xVector == x && _mapa[x, y] == 1 && (x == 0 || y == 0 || x != _mapa.GetUpperBound(0) || y != _mapa.GetUpperBound(1)))
                 {
                     xVector++;
+                }
+
+                if (yVector == y && _mapa[x, y] == 1 && (x == 0 || y == 0 || x < _mapa.GetUpperBound(0) || y < _mapa.GetUpperBound(1)))
+                {
+                    yVector++;
                 }
             }
         }

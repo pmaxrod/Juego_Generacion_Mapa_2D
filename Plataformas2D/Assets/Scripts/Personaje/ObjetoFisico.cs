@@ -11,7 +11,7 @@ public class ObjetoFisico : MonoBehaviour
     protected Vector2 velocidadObjetivo;
     protected bool estaSuelo;
     protected Vector2 normalSuelo;
-    protected Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rb2D;
     protected Vector2 velocidad;
     protected ContactFilter2D filtroContacto;
     protected RaycastHit2D[] bufferGolpe = new RaycastHit2D[16];
@@ -23,7 +23,7 @@ public class ObjetoFisico : MonoBehaviour
 
     void OnEnable()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb2D = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -70,7 +70,7 @@ public class ObjetoFisico : MonoBehaviour
 
         if (distance > distanciaMinimaMovimiento)
         {
-            int count = rigidbody2D.Cast(move, filtroContacto, bufferGolpe, distance + radioCapsula);
+            int count = rb2D.Cast(move, filtroContacto, bufferGolpe, distance + radioCapsula);
             listaBufferGolpe.Clear();
 
             for (int i = 0; i < count; i++)
@@ -104,7 +104,7 @@ public class ObjetoFisico : MonoBehaviour
 
         }
 
-        rigidbody2D.position += move.normalized * distance;
+        rb2D.position += move.normalized * distance;
     }
 
 }
