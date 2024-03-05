@@ -89,11 +89,11 @@ public class InstanciarMapaEscena : MonoBehaviour
         int yVector = _mapa.GetUpperBound(0) / 4;
         int alturaMinima = 0;
 
-        // Para obtener la altura minima del objeto a instanciar
         for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
         {
             for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
             {
+                // Para obtener la altura minima del objeto a instanciar
                 if (_mapa[x, y] == 1 && (x == 0 || y == 0 || x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
                 {
                     alturaMinima = y;

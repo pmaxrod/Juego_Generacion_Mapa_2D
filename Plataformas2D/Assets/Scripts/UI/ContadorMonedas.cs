@@ -15,7 +15,6 @@ public class ContadorMonedas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Set the current number of coins to display
         if (textoContador.text != RecogerMonedas.totalMonedas.ToString())
         {
             textoContador.text = RecogerMonedas.totalMonedas.ToString();
