@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlJugador : PhysicsObject
+public class ControlJugador : ObjetoFisico
 {
 
     public float maxSpeed = 7;
@@ -25,19 +25,19 @@ public class ControlJugador : PhysicsObject
 
         move.x = Input.GetAxis("Horizontal");
 
-        float saltos = maxJumps;
 
-        if (Input.GetButtonDown("Jump") && grounded && saltos > 0)
+        if (Input.GetButtonDown("Jump") && maxJumps > 0)
         {
-            velocity.y = jumpTakeOffSpeed;
-            saltos--;
+            velocidad.y = jumpTakeOffSpeed;
         }
         else if (Input.GetButtonUp("Jump"))
         {
-            if (velocity.y > 0)
+            if (velocidad.y > 0)
             {
-                velocity.y = velocity.y * 0.5f;
+                velocidad.y = velocidad.y * 0.5f;
             }
+            maxJumps--;
+            Debug.Log(maxJumps);
         }
 
         if (move.x > 0.01f)
@@ -55,10 +55,14 @@ public class ControlJugador : PhysicsObject
             }
         }
 
-        animator.SetBool("grounded", grounded);
-        animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
+        if (estaSuelo)
+        {
+            maxJumps = 2;
+        }
 
-        targetVelocity = move * maxSpeed;
-        saltos = maxJumps;
+        animator.SetBool("grounded", estaSuelo);
+        animator.SetFloat("velocityX", Mathf.Abs(velocidad.x) / maxSpeed);
+
+        velocidadObjetivo = move * maxSpeed;
     }
 }
