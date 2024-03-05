@@ -9,6 +9,9 @@ public class ControlMenu : MonoBehaviour
     [SerializeField] GameObject panelInicio;
     [SerializeField] GameObject panelCreditos;
     [SerializeField] TMP_Dropdown escenas;
+    [Header("Puntuacion")]
+    [SerializeField] TMP_Text puntuacion;
+    [SerializeField] TMP_Text monedasRecogidas;
 
     GameObject[] paneles;
 
@@ -30,7 +33,8 @@ public class ControlMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        puntuacion.text = $"Puntuación: {FinNivel.puntuacion}";
+        monedasRecogidas.text = $"Monedas recogidas: {RecogerMonedas.totalMonedas}";
     }
 
     #region METODOS PUBLICOS
@@ -59,6 +63,12 @@ public class ControlMenu : MonoBehaviour
     {
         ActivarPanel(panelInicio);
     }
+
+    public void Inicio()
+    {
+        SceneManager.LoadScene(Constantes.ESCENA_MENU_PRINCIPAL);
+    }
+
     #endregion
 
     #region METODOS PRIVADOS
