@@ -5,8 +5,8 @@ using UnityEngine;
 /// Modelo
 /// </summary>
 public class Algoritmos
-{    
-	//------------------------------------------------------------------------------
+{
+    //------------------------------------------------------------------------------
     /// <summary>
     /// Genera un array bidimensional
     /// </summary>
@@ -14,7 +14,7 @@ public class Algoritmos
     /// <param name="_alto"> al to del mapa 2D</param>
     /// <param name="_vacio"> Verdadero si queremos iniciarlizarlo a cero. Si no a uno.</param>
     /// <returns> El mapa 2D generado</returns>
-    public static int[,] GenerarArray(int [,] _mapa, int _ancho, int _alto, bool _vacio)
+    public static int[,] GenerarArray(int[,] _mapa, int _ancho, int _alto, bool _vacio)
     {
         for (int x = 0; x < _ancho; x++)
         {
@@ -263,6 +263,7 @@ public class Algoritmos
             }
         }
 
+
         return _mapa;
     }
 
@@ -282,15 +283,15 @@ public class Algoritmos
         int alto = _mapa.GetUpperBound(1) + 1;
 
         // mejora - bordes son muros
-        // excluimos los bordes del radio de acci�n
+        // excluimos los bordes del radio de accion
         if (_bordesSonMuros)
         {
-            vMin++;
-            vMaxX--;
-            vMaxY--;
+            vMin += 2;
+            vMaxX -= 2;
+            vMaxY -= 2;
 
-            ancho -= 2;
-            alto -= 2;
+            ancho -= 4;
+            alto -= 4;
         }
 
         // Definir la posicion de inicio en X y en Y
@@ -352,12 +353,11 @@ public class Algoritmos
             posY = Mathf.Clamp(posY, vMin, vMaxY);
 
         } // fin del while
-
         return _mapa;
     }
     #endregion
-	
-	#region tuneles
+
+    #region tuneles
     //-------------------------------------------------------------------
     public static int[,] TunelVertical(int[,] _mapa, float _semilla, int _anchoMin,
         int _anchoMax, float _aspereza, int _desplazamientoMax, float _desplazamiento)
@@ -368,7 +368,7 @@ public class Algoritmos
 
         // posicion de comienzo del mapa
         int x = _mapa.GetUpperBound(0) / 2; // la mitad del mapa
-        //int x = Random.Range(0, _mapa.GetUpperBound(0)); // 
+        //int x = Random.Range(0, _mapa.GetUpperBound(0)); //
 
         // la semilla de nuestro random
         Random.InitState(_semilla.GetHashCode());
@@ -383,7 +383,7 @@ public class Algoritmos
             }
 
             // una _aspereza del 0, significa que no queremos que cambie el ancho del tunel
-            // le damos la vuelta a _aspereza, para que cambie 1- 0, nunca cambia ya que 
+            // le damos la vuelta a _aspereza, para que cambie 1- 0, nunca cambia ya que
             // el valor de Random.value nunca va a ser mayor que 1
             if (Random.value > 1 - _aspereza)
             {
@@ -423,7 +423,7 @@ public class Algoritmos
         // posicion de comienzo del mapa
         int y = _mapa.GetUpperBound(1) / 2; // la mitad del mapa
 
-        //int x = Random.Range(0, _mapa.GetUpperBound(0)); // 
+        //int x = Random.Range(0, _mapa.GetUpperBound(0)); //
 
         // la semilla de nuestro random
         Random.InitState(_semilla.GetHashCode());
@@ -438,7 +438,7 @@ public class Algoritmos
             }
 
             // una _aspereza del 0, significa que no queremos que cambie el ancho del tunel
-            // le damos la vuelta a _aspereza, para que cambie 1- 0, nunca cambia ya que 
+            // le damos la vuelta a _aspereza, para que cambie 1- 0, nunca cambia ya que
             // el valor de Random.value nunca va a ser mayor que 1
             if (Random.value > 1 - _aspereza)
             {
@@ -467,7 +467,7 @@ public class Algoritmos
         return _mapa;
     }
     #endregion
-	
+
     #region automatas_celulares
     //--------------------------------------------------------------------------------
     public static int[,] GenerarMapaAleatorio(int _ancho, int _alto, float _semilla,
@@ -523,7 +523,7 @@ public class Algoritmos
                     // N N N
                     // N T N
                     // N N N
-                    // 
+                    //
 
                     if ((vecinoX != _x || vecinoY != _y) && (_incluirDiagonales || (vecinoX == _x || vecinoY == _y)))
                     {
@@ -545,7 +545,7 @@ public class Algoritmos
                 for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
                 {
                     // Incluye las diagonales
-					int totalVecinas = 0;
+                    int totalVecinas = 0;
                     totalVecinas = LosetasVecinas(_mapa, x, y, _incluyeDiagonales);
 
                     if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) || y == 0 || y == _mapa.GetUpperBound(1)))

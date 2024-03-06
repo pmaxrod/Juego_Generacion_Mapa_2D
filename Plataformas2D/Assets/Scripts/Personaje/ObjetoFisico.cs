@@ -51,26 +51,26 @@ public class ObjetoFisico : MonoBehaviour
 
         estaSuelo = false;
 
-        Vector2 deltaPosition = velocidad * Time.deltaTime;
+        Vector2 posicionDelta = velocidad * Time.deltaTime;
 
-        Vector2 moveAlongGround = new Vector2(normalSuelo.y, -normalSuelo.x);
+        Vector2 moverSobreSuelo = new Vector2(normalSuelo.y, -normalSuelo.x);
 
-        Vector2 move = moveAlongGround * deltaPosition.x;
+        Vector2 move = moverSobreSuelo * posicionDelta.x;
 
-        Movement(move, false);
+        Movimiento(move, false);
 
-        move = Vector2.up * deltaPosition.y;
+        move = Vector2.up * posicionDelta.y;
 
-        Movement(move, true);
+        Movimiento(move, true);
     }
 
-    void Movement(Vector2 move, bool yMovement)
+    void Movimiento(Vector2 vector, bool movimientoY)
     {
-        float distance = move.magnitude;
+        float distancia = vector.magnitude;
 
-        if (distance > distanciaMinimaMovimiento)
+        if (distancia > distanciaMinimaMovimiento)
         {
-            int count = rb2D.Cast(move, filtroContacto, bufferGolpe, distance + radioCapsula);
+            int count = rb2D.Cast(vector, filtroContacto, bufferGolpe, distancia + radioCapsula);
             listaBufferGolpe.Clear();
 
             for (int i = 0; i < count; i++)
@@ -80,31 +80,31 @@ public class ObjetoFisico : MonoBehaviour
 
             for (int i = 0; i < listaBufferGolpe.Count; i++)
             {
-                Vector2 currentNormal = listaBufferGolpe[i].normal;
-                if (currentNormal.y > normalSueloMinY)
+                Vector2 normalActual = listaBufferGolpe[i].normal;
+                if (normalActual.y > normalSueloMinY)
                 {
                     estaSuelo = true;
-                    if (yMovement)
+                    if (movimientoY)
                     {
-                        normalSuelo = currentNormal;
-                        currentNormal.x = 0;
+                        normalSuelo = normalActual;
+                        normalActual.x = 0;
                     }
                 }
 
-                float projection = Vector2.Dot(velocidad, currentNormal);
-                if (projection < 0)
+                float proyeccion = Vector2.Dot(velocidad, normalActual);
+                if (proyeccion < 0)
                 {
-                    velocidad += -projection * currentNormal;
+                    velocidad += -proyeccion * normalActual;
                 }
 
-                float modifiedDistance = listaBufferGolpe[i].distance - radioCapsula;
-                distance = modifiedDistance < distance ? modifiedDistance : distance;
+                float distanciaModificada = listaBufferGolpe[i].distance - radioCapsula;
+                distancia = distanciaModificada < distancia ? distanciaModificada : distancia;
             }
 
 
         }
 
-        rb2D.position += move.normalized * distance;
+        rb2D.position += vector.normalized * distancia;
     }
 
 }

@@ -10,28 +10,28 @@ using UnityEditor;
 
 /// <summary>
 /// Este script convierte a la clase Algoritmo en un objeto programable.
-/// Para crear un nuevo Algoritmo, haga clic con el boton derecho en la vista del proyecto y 
+/// Para crear un nuevo Algoritmo, haga clic con el boton derecho en la vista del proyecto y
 /// seleccione Configuracion de la capa del mapa
 /// Luego puede usar este script con Generador para generar su nivel
 /// </summary>
-/// 
+///
 public enum Algoritmo
 {
-	PERLINNOISE,
-	PERLINNOISE_SUAVIZADO,
-	RANDOMWALK,
-	RANDOMWALK_SUAVIZADO,
+    PERLINNOISE,
+    PERLINNOISE_SUAVIZADO,
+    RANDOMWALK,
+    RANDOMWALK_SUAVIZADO,
 
-	PERLINNOISE_CUEVA,
-	PERLINNOISE_CUEVA_MODIFICADO,
-	RANDOMWALK_CUEVA,
-	RANDOMWALK_CUEVA_MODIFICADO,
+    PERLINNOISE_CUEVA,
+    PERLINNOISE_CUEVA_MODIFICADO,
+    RANDOMWALK_CUEVA,
+    RANDOMWALK_CUEVA_MODIFICADO,
 
-	TUNEL_VERTICAL,
-	TUNEL_HORIZONTAL,
+    TUNEL_VERTICAL,
+    TUNEL_HORIZONTAL,
 
-	MAPA_ALEATORIO,
-	AUTOMATA_CELULAR_MOORE,
+    MAPA_ALEATORIO,
+    AUTOMATA_CELULAR_MOORE,
     AUTOMATA_CELULAR_VONNEUMAN
 }
 
@@ -41,23 +41,23 @@ public enum Algoritmo
 
 public class ConfigurarMapa : ScriptableObject
 {
-	public Algoritmo algoritmo;
-	public bool semillaAleatoria = false;
-	public float semilla;
-	public int porcentajeRelleno;
-	public int porcentajeSuavizar; 
-	public int porcentajeEliminar; 
-	public int intervalo;  // suavizar el algoritmo de Perlin Noise
+    public Algoritmo algoritmo;
+    public bool semillaAleatoria = false;
+    public float semilla;
+    public int porcentajeRelleno;
+    public int porcentajeSuavizar;
+    public int porcentajeEliminar;
+    public int intervalo;  // suavizar el algoritmo de Perlin Noise
     public float desplazamientoX, desplazamientoY; // desplazamiento para Perlin Noise Cueva
     public bool diagonal;  // modificar el algoritmo de RandomWalk Cueva
 
-	public int minAncho, maxAncho, maxCambio, aspereza, movimiento;
-	public bool conBordes; 
-	public float modificador;
+    public int minAncho, maxAncho, maxCambio, aspereza, movimiento;
+    public bool conBordes;
+    public float modificador;
 
     // algoritmo modificador de tuneles
     public int desplazamientoMax;
-    public float desplazamiento; 
+    public float desplazamiento;
 
 
     public float porcentajeRellenoFloat; // Para los algoritmos de aut�matas
@@ -165,8 +165,9 @@ public class ConfigurarMapaEditor : Editor
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         AssetDatabase.SaveAssets();
 
-        if (GUI.changed){
-            EditorUtility.SetDirty(capaMapa);			
-		}
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(capaMapa);
+        }
     }
 }

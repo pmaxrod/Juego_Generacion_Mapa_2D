@@ -143,4 +143,9 @@ public class Generador : MonoBehaviour
 
         VisualizarMapa.LimpiarMapa(mapaDeLosetas);
     }
+
+    public Tilemap GetTilemap()
+    {
+        return mapaDeLosetas;
+    }
 }
