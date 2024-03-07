@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ConfiguracionMapa
   m_EditorClassIdentifier: 
   algoritmo: 5
-  semillaAleatoria: 1
-  semilla: 30
+  semillaAleatoria: 0
+  semilla: 1
   porcentajeRelleno: 0
   porcentajeSuavizar: 0
   porcentajeEliminar: 25

@@ -403,7 +403,7 @@ MonoBehaviour:
   normalSueloMinY: 0.65
   modificadorGravedad: 1
   velocidadMaxima: 7
-  velocidadSalto: 7
+  velocidadSalto: 10
 --- !u!1 &7991900274691698326
 GameObject:
   m_ObjectHideFlags: 0
