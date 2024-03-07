@@ -19,15 +19,18 @@ public class ControlMenu : MonoBehaviour
 
     void Awake()
     {
-        paneles = new GameObject[] { panelInicio, panelCreditos };
+        if (panelInicio != null && panelCreditos != null)
+            paneles = new GameObject[] { panelInicio, panelCreditos };
 
-        escenas.interactable = true;
+        if (escenas != null)
+            escenas.interactable = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        ActivarPanel(panelInicio);
+        if(panelInicio != null)
+            ActivarPanel(panelInicio);
     }
 
     // Update is called once per frame

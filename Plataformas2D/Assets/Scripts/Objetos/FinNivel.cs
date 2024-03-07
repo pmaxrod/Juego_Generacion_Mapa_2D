@@ -6,29 +6,26 @@ using UnityEngine.SceneManagement;
 public class FinNivel : MonoBehaviour
 {
     public static int puntuacion = 0;
+    float longitudRayo = 75f;
 
     void FixedUpdate()
     {
-        //Length of the ray
-        float laserLength = 50f;
+        RaycastHit2D raycast = Physics2D.Raycast(transform.position, new Vector2(0, longitudRayo), longitudRayo);
 
-        //Get the first object hit by the ray
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.one, laserLength);
-
-        //If the collider of the object hit is not NUll
-        if (hit.collider != null)
+        // Si el collider del raycast not es nulo
+        if (raycast.collider.CompareTag(Constantes.TAG_JUGADOR))
         {
-            //Hit something, print the tag of the object
-            Debug.Log("Hitting: " + hit.collider.tag);
+            AcabarNivel();
+            Debug.Log("Golpeando: " + raycast.collider.tag);
         }
 
-        //Method to draw the ray in scene for debug purpose
-        Debug.DrawRay(transform.position, Vector2.right * laserLength, Color.red);
+        // Rayo dibujado en la escena para depuracion
+        Debug.DrawRay(transform.position, Vector2.down * longitudRayo, Color.red);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Player"))
+        if (collider.CompareTag(Constantes.TAG_JUGADOR))
         {
             AcabarNivel();
         }

@@ -11,5 +11,6 @@ public class Constantes
     public static string ESCENA_FIN_JUEGO = "Fin";
 
     public static string TAG_MONEDA = "Moneda";
+    public static string TAG_JUGADOR = "Player";
 
 }

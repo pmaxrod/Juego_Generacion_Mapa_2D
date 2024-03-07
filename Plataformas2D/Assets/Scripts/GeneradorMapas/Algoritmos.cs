@@ -52,6 +52,8 @@ public class Algoritmos
 
         return _mapa;
     }
+
+    // Perlin Noise suavizado
     public static int[,] PerlinNoise(int[,] _mapa, float _semilla, int _intervalo)
     {
         if (_intervalo > 1)
@@ -195,36 +197,6 @@ public class Algoritmos
     #endregion
 
     #region cuevas
-
-    //------------------------------------------------------------------
-    public static int[,] PerlinNoiseCueva(int[,] _mapa, float _semilla, float _modificador, bool _bordesSonMuros)
-    {
-        // almacena si hay que poner hueco o suelo
-
-        int nuevoPunto;
-
-        for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
-        {
-            for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
-            {
-                // comprobar si los bordes son muros o no
-
-                if (_bordesSonMuros && (x == 0 || y == 0 ||
-                    x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
-                {
-                    _mapa[x, y] = 1;
-                }
-                else
-                {
-                    // se redonde el resultado de la funcion PerlinNoise
-                    nuevoPunto = Mathf.RoundToInt(Mathf.PerlinNoise(x * _modificador + _semilla, y * _modificador + _semilla));
-                    _mapa[x, y] = nuevoPunto;
-                }
-            }
-        }
-        return _mapa;
-    }
-
     //-------------------------------------------------------------------------------------------
     // desplazar el mapa segun los valores de los offSet
     /// <summary>
@@ -256,8 +228,7 @@ public class Algoritmos
                 else
                 {
                     // se redonde el resultado de la funcion PerlinNoise
-                    nuevoPunto = Mathf.RoundToInt(Mathf.PerlinNoise(x * _modificador + _offSetX + _semilla,
-                        y * _modificador + _offSetY + _semilla));
+                    nuevoPunto = Mathf.RoundToInt(Mathf.PerlinNoise(x * _modificador + _offSetX + _semilla, y * _modificador + _offSetY + _semilla));
                     _mapa[x, y] = nuevoPunto;
                 }
             }
@@ -562,7 +533,6 @@ public class Algoritmos
                     {
                         _mapa[x, y] = 0;
                     }
-
                 }
             }
         }
