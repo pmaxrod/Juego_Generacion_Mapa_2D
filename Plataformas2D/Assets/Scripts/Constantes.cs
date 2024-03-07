@@ -13,4 +13,7 @@ public class Constantes
     public static string TAG_MONEDA = "Moneda";
     public static string TAG_JUGADOR = "Player";
 
+    public static string GAMEOBJECT_INDICADORFIN = "Indicador_Fin";
+    public static string GAMEOBJECT_GENERADOR = "_Generador";
+
 }

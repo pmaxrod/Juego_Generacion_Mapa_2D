@@ -2,39 +2,71 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEngine.UI.Image;
 
 public class FinNivel : MonoBehaviour
 {
     public static int puntuacion = 0;
-    float longitudRayo = 75f;
+    private float longitudRayo;
+    public GameObject indicadorFin;
+
+    void Start()
+    {
+        longitudRayo = Generador.instance.GetDimensiones().y;
+        InstanciarIndicadorFinNivel();
+    }
 
     void FixedUpdate()
     {
-        RaycastHit2D raycast = Physics2D.Raycast(transform.position, new Vector2(0, longitudRayo), longitudRayo);
-
-        // Si el collider del raycast not es nulo
-        if (raycast.collider.CompareTag(Constantes.TAG_JUGADOR))
-        {
-            AcabarNivel();
-            Debug.Log("Golpeando: " + raycast.collider.tag);
-        }
-
-        // Rayo dibujado en la escena para depuracion
-        Debug.DrawRay(transform.position, Vector2.down * longitudRayo, Color.red);
+        //ContactoJugador();
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag(Constantes.TAG_JUGADOR))
-        {
-            AcabarNivel();
-        }
-    }
-
+    // Acaba el nivel
     public void AcabarNivel()
     {
         puntuacion = 100 + (RecogerMonedas.totalMonedas * 100);
         SceneManager.LoadScene(Constantes.ESCENA_FIN_JUEGO);
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(Constantes.TAG_JUGADOR))
+        {
+            AcabarNivel();
+        }
+    }
+
+    // Controla el contacto del fin del nivel con el jugador
+    private void ContactoJugador()
+    {
+
+        RaycastHit2D[] raycasts = Generador.instance.configurarMapa.algoritmo != Algoritmo.TUNEL_VERTICAL ? Physics2D.RaycastAll(transform.position, Vector2.left) : Physics2D.RaycastAll(transform.position, Vector2.down);
+
+        // Si el collider del raycast not es nulo
+        foreach (RaycastHit2D raycast in raycasts)
+        {
+            if (raycast.collider.CompareTag(Constantes.TAG_JUGADOR))
+            {
+                AcabarNivel();
+                Debug.Log("Golpeando: " + raycast.collider.tag);
+            }
+        }
+        //Debug.DrawRay(transform.position, Vector2.down * longitudRayo, Color.red);
+    }
+
+
+    // Instancia el Indicador del final del nivel
+    private void InstanciarIndicadorFinNivel()
+    {
+        //indicadorFin.transform.Translate(0, -Mathf.FloorToInt(longitudRayo), 0);
+
+        if (Generador.instance.configurarMapa.algoritmo == Algoritmo.TUNEL_VERTICAL)
+        {
+            indicadorFin.transform.Rotate(new Vector3(0, 0, 90));
+            longitudRayo = Generador.instance.GetDimensiones().x * 1.5f;
+        }
+        indicadorFin.transform.localScale = new Vector3(0.1f, longitudRayo, 1);
+    }
+
 }

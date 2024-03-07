@@ -49,7 +49,7 @@ public class InstanciarMapaEscena : MonoBehaviour
     {
         for (int i = 0; i < cantidadMonedas; i++)
         {
-            int posicionAleatoria = Random.Range(i, casillasVacias.Length);
+            int posicionAleatoria = Random.Range(i, casillasVacias.Length - 1);
             moneda.transform.position = casillasVacias[posicionAleatoria];
             Instantiate(moneda, moneda.transform);
         }
@@ -58,7 +58,8 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     private void InstanciarFinNivel()
     {
-        finNivel.transform.position = casillasVacias[casillasVacias.Length - 1];
+        finNivel.transform.position = generador.configurarMapa.algoritmo != Algoritmo.TUNEL_VERTICAL ? casillasVacias[casillasVacias.Length - 1] : generador.GetDimensiones();
+
         Instantiate(finNivel, finNivel.transform);
     }
 

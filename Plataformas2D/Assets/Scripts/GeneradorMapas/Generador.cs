@@ -33,9 +33,11 @@ public class Generador : MonoBehaviour
     public bool algoritmoAleatorio;
     public int[,] mapa;
 
+    public static Generador instance;
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
     }
 
     // Update is called once per frame
@@ -147,5 +149,10 @@ public class Generador : MonoBehaviour
     public Tilemap GetTilemap()
     {
         return mapaDeLosetas;
+    }
+
+    public Vector2 GetDimensiones()
+    {
+        return new Vector2(ancho, alto);
     }
 }

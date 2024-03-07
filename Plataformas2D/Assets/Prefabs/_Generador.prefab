@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5244438459036725552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3853784711961227322}
+  - component: {fileID: 725223991314492771}
+  m_Layer: 0
+  m_Name: _InstanciarMapa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3853784711961227322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244438459036725552}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8295041980225106207}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &725223991314492771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5244438459036725552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc6c6216d7e05346ac3850b110cc312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generador: {fileID: 109811831161462501}
+  personaje: {fileID: 6662994395591262076, guid: b7c81f9506c22fa49b8566d108ed6842, type: 3}
+  moneda: {fileID: 2018798703324845219, guid: b0103387b2050534d8fa9d0941032e0b, type: 3}
+  cantidadMonedas: 5
+  finNivel: {fileID: 4537434937764572382, guid: d99021c3e1304d14fb3f82456c10839a, type: 3}
+--- !u!1 &7958259572705007597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8295041980225106207}
+  - component: {fileID: 109811831161462501}
+  m_Layer: 0
+  m_Name: _Generador
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8295041980225106207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7958259572705007597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3853784711961227322}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &109811831161462501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7958259572705007597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93fe1f1ea9b5964f80e511cab9b1a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapaDeLosetas: {fileID: 0}
+  loseta: {fileID: 11400000, guid: 85bf3bf1db4ac9a44a2b996dd7422eaf, type: 2}
+  ancho: 60
+  alto: 40
+  configurarMapa: {fileID: 11400000, guid: 4f8e9141981b1fc4bac78dd4315a3f83, type: 2}
+  algoritmosMapa: {fileID: 11400000, guid: 8b78d7e53ede03445bfd96a25fcb8c76, type: 2}
+  algoritmoAleatorio: 1
