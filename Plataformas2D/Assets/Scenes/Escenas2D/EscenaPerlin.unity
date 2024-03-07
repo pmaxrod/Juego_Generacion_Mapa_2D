@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: mapaDeLosetas
       value: 
       objectReference: {fileID: 184268680}
+    - target: {fileID: 109811831161462501, guid: fa55a12a9db964f4f8ada39262e68918, type: 3}
+      propertyPath: algoritmosMapa
+      value: 
+      objectReference: {fileID: 11400000, guid: 8b78d7e53ede03445bfd96a25fcb8c76, type: 2}
     - target: {fileID: 7958259572705007597, guid: fa55a12a9db964f4f8ada39262e68918, type: 3}
       propertyPath: m_Name
       value: _Generador

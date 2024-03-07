@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b3fea777826214d9fe4405c5797013, type: 3}
   m_Name: ConfiguracionMapa
   m_EditorClassIdentifier: 
-  algoritmo: 8
+  algoritmo: 5
   semillaAleatoria: 1
-  semilla: 1
+  semilla: 41
   porcentajeRelleno: 0
   porcentajeSuavizar: 0
   porcentajeEliminar: 25

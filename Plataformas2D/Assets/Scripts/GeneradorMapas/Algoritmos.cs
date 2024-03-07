@@ -220,8 +220,7 @@ public class Algoritmos
             for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
             {
                 // comprobar si los bordes son muros o no
-
-                if (_bordesSonMuros && (x == 0 || y == 0 || x == _mapa.GetUpperBound(0) || y == _mapa.GetUpperBound(1)))
+                if (_bordesSonMuros && (x == 0 || y == 0 || x == _mapa.GetUpperBound(0)|| y == _mapa.GetUpperBound(1)))
                 {
                     _mapa[x, y] = 1;
                 }
@@ -239,8 +238,7 @@ public class Algoritmos
     }
 
     //--------------------------------------------------------------------
-    public static int[,] RandomWalkCueva(int[,] _mapa, float _semilla, float _porcentajeSueloEliminar,
-        bool _bordesSonMuros = true, bool _movDiagonal = false)
+    public static int[,] RandomWalkCueva(int[,] _mapa, float _semilla, float _porcentajeSueloEliminar, bool _bordesSonMuros = true, bool _movDiagonal = false)
     {
         // Las semilla de nuestro Random
         Random.InitState(_semilla.GetHashCode());
@@ -257,12 +255,12 @@ public class Algoritmos
         // excluimos los bordes del radio de accion
         if (_bordesSonMuros)
         {
-            vMin += 2;
-            vMaxX -= 2;
-            vMaxY -= 2;
+            vMin += 1;
+            vMaxX -= 1;
+            vMaxY -= 1;
 
-            ancho -= 4;
-            alto -= 4;
+            ancho -= 2;
+            alto -= 2;
         }
 
         // Definir la posicion de inicio en X y en Y

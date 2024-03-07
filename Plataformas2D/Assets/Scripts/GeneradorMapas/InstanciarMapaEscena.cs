@@ -17,6 +17,9 @@ public class InstanciarMapaEscena : MonoBehaviour
     [Tooltip("Fin del Nivel")]
     [SerializeField] private GameObject finNivel;
 
+    [Tooltip("Fondo")]
+    [SerializeField] private GameObject fondo;
+
     Vector2[] casillasVacias;
 
     // Start is called before the first frame update
@@ -26,9 +29,7 @@ public class InstanciarMapaEscena : MonoBehaviour
 
         casillasVacias = CasillasVacias(generador.mapa);
 
-        InstanciarMonedas();
-
-        InstanciarFinNivel();
+        InstanciarObjetos();
 
         InstanciarPersonaje();
     }
@@ -40,9 +41,17 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     private void InstanciarPersonaje()
     {
-        personaje.transform.position = casillasVacias[0] + new Vector2(0.5f, 0.5f);
+        personaje.transform.position = casillasVacias[0];
 
         Instantiate(personaje, personaje.transform);
+    }
+
+    private void InstanciarObjetos()
+    {
+        fondo.transform.localScale = generador.GetDimensiones();
+        InstanciarMonedas();
+
+        InstanciarFinNivel();
     }
 
     private void InstanciarMonedas()
@@ -62,6 +71,7 @@ public class InstanciarMapaEscena : MonoBehaviour
 
         Instantiate(finNivel, finNivel.transform);
     }
+
 
     private Vector2[] CasillasVacias(int[,] _mapa)
     {
