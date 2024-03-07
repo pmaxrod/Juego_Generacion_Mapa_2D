@@ -6,7 +6,6 @@ using static UnityEngine.UI.Image;
 
 public class FinNivel : MonoBehaviour
 {
-    public static int puntuacion = 0;
     private float longitudRayo;
     public GameObject indicadorFin;
 
@@ -24,7 +23,7 @@ public class FinNivel : MonoBehaviour
     // Acaba el nivel
     public void AcabarNivel()
     {
-        puntuacion = 100 + (RecogerMonedas.totalMonedas * 100);
+        DatosJugador.instance.puntuacion = 100 + (DatosJugador.instance.monedas * 100);
         SceneManager.LoadScene(Constantes.ESCENA_FIN_JUEGO);
 
     }

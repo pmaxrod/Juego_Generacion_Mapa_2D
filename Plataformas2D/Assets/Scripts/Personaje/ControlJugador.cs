@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControlJugador : ObjetoFisico
 {
@@ -12,11 +13,26 @@ public class ControlJugador : ObjetoFisico
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    private DatosJugador datosJugador;
+
     // Use this for initialization
     void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        datosJugador = GetComponent<DatosJugador>();
+    }
+
+    void Update()
+    {
+        if (datosJugador.vidas < 1)
+        {
+            Morir();
+        }
+        if (transform.position.y < 0)
+        {
+            DatosJugador.instance.vidas = 0;
+        }
     }
 
     protected override void ComputeVelocity()
@@ -64,5 +80,10 @@ public class ControlJugador : ObjetoFisico
         animator.SetFloat("velocityX", Mathf.Abs(velocidad.x) / velocidadMaxima);
 
         velocidadObjetivo = move * velocidadMaxima;
+    }
+
+    private void Morir()
+    {
+        SceneManager.LoadScene(Constantes.ESCENA_FIN_JUEGO);
     }
 }

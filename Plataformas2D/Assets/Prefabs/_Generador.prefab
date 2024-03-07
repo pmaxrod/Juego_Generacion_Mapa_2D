@@ -115,6 +115,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fondo
       objectReference: {fileID: 0}
+    - target: {fileID: 87085136970590602, guid: abed187e81f36dc40944dd82648722d4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3278317640817128971, guid: abed187e81f36dc40944dd82648722d4, type: 3}
       propertyPath: m_LocalScale.x
       value: 1

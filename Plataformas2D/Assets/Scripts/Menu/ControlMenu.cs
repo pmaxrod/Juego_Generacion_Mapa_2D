@@ -29,17 +29,16 @@ public class ControlMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(panelInicio != null)
+        if (panelInicio != null)
             ActivarPanel(panelInicio);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(puntuacion != null)
-            puntuacion.text = $"Puntuación: {FinNivel.puntuacion}";
-        if (monedasRecogidas != null)
-            monedasRecogidas.text = $"Monedas recogidas: {RecogerMonedas.totalMonedas}";
+        if (puntuacion != null && monedasRecogidas != null)
+            PantallaFin();
+
     }
 
     #region METODOS PUBLICOS
@@ -101,6 +100,12 @@ public class ControlMenu : MonoBehaviour
             default:
                 return "EscenaPrueba";
         }
+    }
+
+    private void PantallaFin()
+    {
+        puntuacion.text = $"Puntuación: {DatosJugador.instance.puntuacion}";
+        monedasRecogidas.text = $"Monedas recogidas: {DatosJugador.instance.monedas}";
     }
     #endregion
 

@@ -41,7 +41,7 @@ public class InstanciarMapaEscena : MonoBehaviour
 
     private void InstanciarPersonaje()
     {
-        personaje.transform.position = casillasVacias[0];
+        personaje.transform.position = casillasVacias[0] + new Vector2(.5f, .5f);
 
         Instantiate(personaje, personaje.transform);
     }
