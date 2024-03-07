@@ -503,15 +503,15 @@ public class Algoritmos
         // contar las losetas vecinas
         int totalVecinas = 0;
 
-        // recorrer las losetas vecinas de esta posici�n
+        // recorrer las losetas vecinas de esta posicion
         for (int vecinoX = _x - 1; vecinoX <= _x + 1; vecinoX++)
         {
             for (int vecinoY = _y - 1; vecinoY <= _y + 1; vecinoY++)
             {
                 // comprorbar que estamos dentro del mapa
-                if (vecinoX >= 0 && vecinoX <= _mapa.GetUpperBound(0) && vecinoY >= 0 && vecinoY <= _mapa.GetUpperBound(1))
+                if (vecinoX >= 0 && vecinoX < _mapa.GetUpperBound(0) && vecinoY >= 0 && vecinoY < _mapa.GetUpperBound(1))
                 {
-                    // ignorar la posici�n de central (_x,_y)
+                    // ignorar la posicion de central (_x,_y)
                     // sin incluir las diagonales
                     //
                     //   N
@@ -527,7 +527,7 @@ public class Algoritmos
 
                     if ((vecinoX != _x || vecinoY != _y) && (_incluirDiagonales || (vecinoX == _x || vecinoY == _y)))
                     {
-                        // sumar las casillas que tienen 1, y as� sabremos las casillas vecinas que tienen vecinas
+                        // sumar las casillas que tienen 1, y asi sabremos las casillas vecinas que tienen vecinas
                         totalVecinas += _mapa[vecinoX, vecinoY];
                     }
                 }
@@ -540,15 +540,15 @@ public class Algoritmos
     {
         for (int i = 0; i < _totalDePasadas; i++)
         {
-            for (int x = 0; x <= _mapa.GetUpperBound(0); x++)
+            for (int x = 0; x < _mapa.GetUpperBound(0); x++)
             {
-                for (int y = 0; y <= _mapa.GetUpperBound(1); y++)
+                for (int y = 0; y < _mapa.GetUpperBound(1); y++)
                 {
                     // Incluye las diagonales
                     int totalVecinas = 0;
                     totalVecinas = LosetasVecinas(_mapa, x, y, _incluyeDiagonales);
 
-                    if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) || y == 0 || y == _mapa.GetUpperBound(1)))
+                    if (_bordesSonMuros && (x == 0 || x == _mapa.GetUpperBound(0) - 1 || y == 0 || y == _mapa.GetUpperBound(1) - 1))
                     {
                         _mapa[x, y] = 1;
                     }
@@ -557,12 +557,12 @@ public class Algoritmos
                     {
                         _mapa[x, y] = 1;
                     }
+                    // si tenemos exactamente _totalVecinas vecinos, no cambiamos nada
                     else if (totalVecinas < _totalVecinas)
                     {
                         _mapa[x, y] = 0;
                     }
 
-                    // si tenemos exactamente _totalVecinas vecinos, no cambiamos nada
                 }
             }
         }

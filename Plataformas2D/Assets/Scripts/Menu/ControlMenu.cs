@@ -33,8 +33,10 @@ public class ControlMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        puntuacion.text = $"Puntuación: {FinNivel.puntuacion}";
-        monedasRecogidas.text = $"Monedas recogidas: {RecogerMonedas.totalMonedas}";
+        if(puntuacion != null)
+            puntuacion.text = $"Puntuación: {FinNivel.puntuacion}";
+        if (monedasRecogidas != null)
+            monedasRecogidas.text = $"Monedas recogidas: {RecogerMonedas.totalMonedas}";
     }
 
     #region METODOS PUBLICOS

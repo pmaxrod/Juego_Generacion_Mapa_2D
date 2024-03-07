@@ -932,7 +932,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &366243649
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2065,8 +2065,8 @@ RectTransform:
   m_GameObject: {fileID: 1091063039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 212029947}
   m_Father: {fileID: 366243649}
@@ -2255,7 +2255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1193919401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2449,8 +2449,8 @@ RectTransform:
   m_GameObject: {fileID: 1306594485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 864802988}
   m_Father: {fileID: 366243649}
@@ -2601,6 +2601,8 @@ MonoBehaviour:
   panelInicio: {fileID: 366243648}
   panelCreditos: {fileID: 1193919400}
   escenas: {fileID: 1562734383}
+  puntuacion: {fileID: 0}
+  monedasRecogidas: {fileID: 0}
 --- !u!1 &1488414802
 GameObject:
   m_ObjectHideFlags: 0
@@ -2629,8 +2631,8 @@ RectTransform:
   m_GameObject: {fileID: 1488414802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1532733555}
   m_Father: {fileID: 366243649}
@@ -3179,8 +3181,8 @@ RectTransform:
   m_GameObject: {fileID: 1562734381}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 574738174}
   - {fileID: 1063079004}

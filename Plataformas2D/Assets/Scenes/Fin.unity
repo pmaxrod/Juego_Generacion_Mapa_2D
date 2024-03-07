@@ -1466,10 +1466,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelInicio: {fileID: 0}
-  panelCreditos: {fileID: 479547835}
+  panelCreditos: {fileID: 0}
   escenas: {fileID: 0}
-  puntuacion: {fileID: 0}
-  monedasRecogidas: {fileID: 0}
+  puntuacion: {fileID: 1752424779}
+  monedasRecogidas: {fileID: 711061203}
 --- !u!4 &1805357771
 Transform:
   m_ObjectHideFlags: 0

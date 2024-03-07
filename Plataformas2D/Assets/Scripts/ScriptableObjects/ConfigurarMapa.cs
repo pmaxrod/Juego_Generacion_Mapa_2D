@@ -51,16 +51,12 @@ public class ConfigurarMapa : ScriptableObject
     public float desplazamientoX, desplazamientoY; // desplazamiento para Perlin Noise Cueva
     public bool diagonal;  // modificar el algoritmo de RandomWalk Cueva
 
-    public int minAncho, maxAncho, maxCambio, aspereza, movimiento;
+    // algoritmo modificador de tuneles
+    public int minAncho, maxAncho, aspereza, desplazamientoMax, desplazamiento;
     public bool conBordes;
     public float modificador;
 
-    // algoritmo modificador de tuneles
-    public int desplazamientoMax;
-    public float desplazamiento;
-
-
-    public float porcentajeRellenoFloat; // Para los algoritmos de aut�matas
+    public float porcentajeRellenoFloat; // Para los algoritmos de automatas
     public int numeroPasadas; // numero de pasadas para los automatas
 }
 
@@ -131,17 +127,17 @@ public class ConfigurarMapaEditor : Editor
             case Algoritmo.TUNEL_VERTICAL:
                 capaMapa.minAncho = EditorGUILayout.IntField("Ancho minimo", capaMapa.minAncho);
                 capaMapa.maxAncho = EditorGUILayout.IntField("Ancho maximo", capaMapa.maxAncho);
-                capaMapa.maxCambio = EditorGUILayout.IntField("Maximo cambio", capaMapa.maxCambio);
+                capaMapa.desplazamientoMax = EditorGUILayout.IntField("Maximo cambio", capaMapa.desplazamientoMax);
                 capaMapa.aspereza = EditorGUILayout.IntSlider(new GUIContent("Aspereza", "Esto se compara con un numero aleatorio para determinar si podemos cambiar la posicion x actual de la ruta."), capaMapa.aspereza, 0, 1);
-                capaMapa.movimiento = EditorGUILayout.IntSlider(new GUIContent("Movimiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.movimiento, 0, 100);
+                capaMapa.desplazamiento = EditorGUILayout.IntSlider(new GUIContent("Movimiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.desplazamiento, 0, 1);
                 break;
 
             case Algoritmo.TUNEL_HORIZONTAL:
                 capaMapa.minAncho = EditorGUILayout.IntField("Ancho minimo", capaMapa.minAncho);
                 capaMapa.maxAncho = EditorGUILayout.IntField("Ancho maximo", capaMapa.maxAncho);
-                capaMapa.maxCambio = EditorGUILayout.IntField("Maximo cambio", capaMapa.maxCambio);
-                capaMapa.aspereza = EditorGUILayout.IntSlider(new GUIContent("Aspereza", "Esto se compara con un numero aleatorio para determinar si podemos cambiar la posicion x actual de la ruta."), capaMapa.aspereza, 0, 100);
-                capaMapa.movimiento = EditorGUILayout.IntSlider(new GUIContent("Movimiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.movimiento, 0, 100);
+                capaMapa.desplazamientoMax = EditorGUILayout.IntField("Maximo cambio", capaMapa.desplazamientoMax);
+                capaMapa.aspereza = EditorGUILayout.IntSlider(new GUIContent("Aspereza", "Esto se compara con un numero aleatorio para determinar si podemos cambiar la posicion x actual de la ruta."), capaMapa.aspereza, 0, 1);
+                capaMapa.desplazamiento = EditorGUILayout.IntSlider(new GUIContent("Movimiento", "Esto se compara con un numero aleatorio para determinar si podemos cambiar el ancho del tunel."), capaMapa.desplazamiento, 0, 1);
                 break;
 
             case Algoritmo.MAPA_ALEATORIO:
