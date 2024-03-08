@@ -2800,6 +2800,8 @@ MonoBehaviour:
   escenas: {fileID: 1562734383}
   puntuacion: {fileID: 0}
   monedasRecogidas: {fileID: 0}
+  vidasRestantes: {fileID: 0}
+  textoVictoria: {fileID: 0}
 --- !u!1 &1382368295
 GameObject:
   m_ObjectHideFlags: 0
@@ -3643,7 +3645,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pablo Maxi\xE1 Rodr\xEDguez\n\nUnity\n"
+  m_text: "Pablo Maxi\xE1 Rodr\xEDguez (escenas, iconos interfaz y c\xF3digo)\n\nUnity
+    ()\n\nDigital Moons (fondo mapa)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

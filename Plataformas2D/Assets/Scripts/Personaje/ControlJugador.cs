@@ -23,12 +23,15 @@ public class ControlJugador : ObjetoFisico
         datosJugador = GetComponent<DatosJugador>();
     }
 
-    void Update()
+   void Update()
     {
+        velocidadObjetivo = Vector2.zero;
+        ComputeVelocity();
         if (datosJugador.vidas < 1)
         {
             Morir();
         }
+
         if (transform.position.y < 0)
         {
             DatosJugador.instance.vidas = 0;

@@ -17,6 +17,11 @@ public class InstanciarMapaEscena : MonoBehaviour
     [Tooltip("Fin del Nivel")]
     [SerializeField] private GameObject finNivel;
 
+    [Tooltip("Pincho")]
+    [SerializeField] private GameObject pincho;
+    [Tooltip("Cantidad de pinchos")]
+    [SerializeField] private int cantidadPinchos;
+
     [Tooltip("Fondo")]
     [SerializeField] private GameObject fondo;
 
@@ -49,9 +54,12 @@ public class InstanciarMapaEscena : MonoBehaviour
     private void InstanciarObjetos()
     {
         fondo.transform.localScale = generador.GetDimensiones();
+
         InstanciarMonedas();
 
         InstanciarFinNivel();
+
+        InstanciarPinchos();
     }
 
     private void InstanciarMonedas()
@@ -72,6 +80,14 @@ public class InstanciarMapaEscena : MonoBehaviour
         Instantiate(finNivel, finNivel.transform);
     }
 
+    private void InstanciarPinchos(){
+        for (int i = 0; i < cantidadPinchos; i++)
+        {
+            int posicionAleatoria = Random.Range(i, casillasVacias.Length - 1);
+            pincho.transform.position = casillasVacias[posicionAleatoria];
+            Instantiate(pincho, pincho.transform);
+        }
+    }
 
     private Vector2[] CasillasVacias(int[,] _mapa)
     {

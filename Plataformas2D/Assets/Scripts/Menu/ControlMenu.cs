@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class ControlMenu : MonoBehaviour
 {
+    [Header("Menu Inicio")]
     [SerializeField] GameObject panelInicio;
     [SerializeField] GameObject panelCreditos;
     [SerializeField] TMP_Dropdown escenas;
-    [Header("Puntuacion")]
+    [Header("Fin de la partida")]
     [SerializeField] TMP_Text puntuacion;
     [SerializeField] TMP_Text monedasRecogidas;
+    [SerializeField] TMP_Text vidasRestantes;
+    [SerializeField] TMP_Text textoVictoria;
 
     GameObject[] paneles;
 
@@ -24,6 +27,9 @@ public class ControlMenu : MonoBehaviour
 
         if (escenas != null)
             escenas.interactable = true;
+
+        if (puntuacion != null && monedasRecogidas != null && vidasRestantes != null && textoVictoria != null)
+            PantallaFin();
     }
 
     // Start is called before the first frame update
@@ -31,14 +37,6 @@ public class ControlMenu : MonoBehaviour
     {
         if (panelInicio != null)
             ActivarPanel(panelInicio);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (puntuacion != null && monedasRecogidas != null)
-            PantallaFin();
-
     }
 
     #region METODOS PUBLICOS
@@ -106,6 +104,16 @@ public class ControlMenu : MonoBehaviour
     {
         puntuacion.text = $"Puntuación: {DatosJugador.instance.puntuacion}";
         monedasRecogidas.text = $"Monedas recogidas: {DatosJugador.instance.monedas}";
+
+        if (DatosJugador.instance.vidas < 1){
+            vidasRestantes.gameObject.SetActive(false);
+        }
+
+        vidasRestantes.text = $"Vidas restantes: {DatosJugador.instance.vidas}";
+
+        string texto = DatosJugador.instance.vidas >= 1 ? "¡Has ganado!" : "Fin de la partida";
+
+        textoVictoria.text = texto;
     }
     #endregion
 
