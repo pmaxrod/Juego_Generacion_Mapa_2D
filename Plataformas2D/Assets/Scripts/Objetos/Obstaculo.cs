@@ -16,18 +16,8 @@ public class Obstaculo : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag(Constantes.TAG_JUGADOR))
-        {
-            DatosJugador.instance.vidas--;
-            Debug.Log("Tienes " + DatosJugador.instance.vidas + " vidas");
-        }
-    }
-
-
     void OnCollisionEnter2D(Collision2D other) {
-        if (other.collider.CompareTag(Constantes.TAG_PINCHO))
+        if (other.collider.CompareTag(Constantes.TAG_JUGADOR))
         {
             DatosJugador.instance.vidas--;
             Debug.Log("Tienes " + DatosJugador.instance.vidas + " vidas");

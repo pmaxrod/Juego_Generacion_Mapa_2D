@@ -3645,8 +3645,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Pablo Maxi\xE1 Rodr\xEDguez (escenas, iconos interfaz y c\xF3digo)\n\nUnity
-    ()\n\nDigital Moons (fondo mapa)"
+  m_text: "Pablo Maxi\xE1 Rodr\xEDguez (escenas, iconos interfaz, sprites elementos
+    escenario y c\xF3digo)\n\nUnity (sprites y animaciones de personaje jugable)\n\nDigital
+    Moons (fondo mapa)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
