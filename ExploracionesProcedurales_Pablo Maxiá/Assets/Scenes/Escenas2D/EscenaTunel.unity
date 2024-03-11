@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 15ea0fb3154f0924aa84a35499c0749f, type: 2}
     - target: {fileID: 109811831161462501, guid: fa55a12a9db964f4f8ada39262e68918, type: 3}
       propertyPath: algoritmoAleatorio
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7958259572705007597, guid: fa55a12a9db964f4f8ada39262e68918, type: 3}
       propertyPath: m_Name
